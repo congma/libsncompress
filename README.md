@@ -143,7 +143,7 @@ in the parameter space.  This can be used for constructing the approximate
 covariance of compression parameters.
 
 Please notice that this implementation here is not a general, abstract 
-implementation of the linear compression method detailed in [our paper][m16].  
+implementation of the linear compression method detailed in [our paper][m16].
 It specifically implements the sawtooth-basis compression, which is compatible 
 with the original [JLA one][jla].  The implementation details, as well as the 
 exposed API, are likely to see significant revisions in the future.
