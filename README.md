@@ -25,30 +25,30 @@ Files](#datafiles) for details.
 
 ### Options ###
 
-* `-h`, `--help`: show help message and exit 
-* `-d DIR`, `--covdir DIR`:  path to directory of FITS covariance files 
-  (default: `./covmat`)
-* `-t FILE`, `--table FILE`: path to JLA data table file (default: 
-  `./jla_lcparams.txt`)
-* `-p PREFIX`, `--output-prefix PREFIX`: prefix to output file names
-* `-c z [z ...]`, `--controls z [z ...]`: locations of control points (as 
-  redshift).  At least two control points are required.  If unspecified, use 
-  the default control points in the [JLA paper][jla].
-* `-n`, `--no-logdet`: don't use the correct conditional probability 
-  (default: off; *warning:* use at your own risk)
-* `-v`, `--verbose`: turn on verbose output (default: off)
+*  `-h`, `--help`: show help message and exit 
+*  `-d DIR`, `--covdir DIR`:  path to directory of FITS covariance files 
+   (default: `./covmat`)
+*  `-t FILE`, `--table FILE`: path to JLA data table file (default: 
+   `./jla_lcparams.txt`)
+*  `-p PREFIX`, `--output-prefix PREFIX`: prefix to output file names
+*  `-c z [z ...]`, `--controls z [z ...]`: locations of control points (as 
+   redshift).  At least two control points are required.  If unspecified, use 
+   the default control points in the [JLA paper][jla].
+*  `-n`, `--no-logdet`: don't use the correct conditional probability 
+   (default: off; *warning:* use at your own risk)
+*  `-v`, `--verbose`: turn on verbose output (default: off)
 
 ### Output ###
 
 The script writes three output files when it solves the optimization problem 
 successfully:
 
-* Mean (approximate, actually posterior-optimizing) compression parameters in 
-  the order of (`alpha`, `beta`, `delta_M`, `mu1`, `mu2`, ...), where `muN` is 
-  the value of distance modulus at the `N`-th control point.
-* Covariance matrix (symmetric but with all elements filled) of the 
-  parameters.
-* List of redshift of control points.
+*  Mean (approximate, actually posterior-optimizing) compression parameters in 
+   the order of (`alpha`, `beta`, `delta_M`, `mu1`, `mu2`, ...), where `muN` 
+   is the value of distance modulus at the `N`-th control point.
+*  Covariance matrix (symmetric but with all elements filled) of the 
+   parameters.
+*  List of redshift of control points.
 
 The file names are `mean.txt`, `cov.txt` and `redshift.txt` respectively, but 
 they can be prefixed by arbitrary strings specified by the user with the 
