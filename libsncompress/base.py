@@ -40,11 +40,10 @@ def loadcovbase(dirpath):
             fitsfile = pyfits.open(os.path.join(dirpath, basename))
             tmp.append(numpy.asarray(fitsfile[0].data))
             fitsfile.close()
-    res = sum(tmp)
-    if res is 0:    # "is" is correct here. Very special case.
+    if not tmp:     # Data absent
         raise ValueError("cannot find sum of data covariance matrices")
-    else:
-        return res
+    res = sum(tmp)
+    return res
 
 
 def loadsntable(path):
