@@ -100,8 +100,9 @@ To use the package directly in your own Python program, simply `import
 libsncompress`.
 
 The first thing you need to do is to specify a list (or `numpy` array) of 
-control points, with their *log-10* values.  Currently, due to development 
-legacy, the "binning" class and methods are not particularly efficient.
+control points, by their *base-10 logarithm* values.  Currently, due to 
+development legacy, the "binning" class and methods are not particularly 
+efficient.
 
 This list or array of control points must be encapsulate in *another* 
 container (list, array tuple) before passing to the initializer of 
