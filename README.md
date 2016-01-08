@@ -21,7 +21,7 @@ jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z [z ...]] [-n] [-v]
 ```
 
 The script requires JLA data files to run.  See the section [Data 
-Files](#datafiles) for details.
+Files](#data-files) for details.
 
 ### Options ###
 
@@ -77,7 +77,7 @@ reproduces the default compression results in the [JLA paper][jla].
 jlacompress -n
 ```
 
-## <a name="datafiles"></a>Data Files ##
+## Data Files ##
 
 The JLA data files are *required* for using the package.  However, we cannot 
 distribute them with the source package.  Please read the [JLA readme][jlarm]
