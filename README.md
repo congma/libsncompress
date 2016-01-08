@@ -9,8 +9,9 @@ The Python package `libsncompress` implements the linear compression method
 described in the paper [Ma et al. (2016)][m16].  It is designed for use with
 the [JLA][jla] dataset, but can be easily extended for other similar datasets.
 
-It also includes a Python executable script, `jlacompress`, that serves as an 
-example command-line user interface.
+It also includes a Python executable script, 
+[`jlacompress`](scripts/jlacompress), that serves as an example command-line 
+user interface.
 
 ## JLA Compression Script ##
 
@@ -151,9 +152,9 @@ exposed API, are likely to see significant revisions in the future.
 
 ## Installation ##
 
-The package source directory `libsncompress` can be used directly without 
-installation.  The package and script can also be installed using the standard 
-`distutils` setup script:
+The package source directory [`libsncompress`](libsncompress/) can be used 
+directly without installation.  The package and script can also be installed 
+using the standard `distutils` setup script:
 
 ```bash
 python setup.py install
@@ -176,10 +177,10 @@ Performance is mostly determined by the following two conditions:
     Subprograms">BLAS</abbr>/LAPACK libraries used by `numpy`/`scipy`;
 2.  Choice of initial value and scaling for numerical optimization.
 
-The script `jlacompress` attempts to automatically create acceptable initial 
-value and scaling that is optimized for the *default* compression used in the 
-[JLA paper][jla].  The automatic initial value and scaling are not optimized 
-for any other usage cases.
+The script [`jlacompress`](scripts/jlacompress) attempts to automatically 
+create acceptable initial value and scaling that is optimized for the 
+*default* compression used in the [JLA paper][jla].  The automatic initial 
+value and scaling are not optimized for any other usage cases.
 
 
 [m16]: http://example.com/ "Foo"
