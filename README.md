@@ -73,8 +73,8 @@ The script exits with `0` for success.  Any other value indicates error.
 Assuming the data files are in their default locations, the following command 
 reproduces the default compression results in the [JLA paper][jla].
 
-```console
-$ jlacompress -n
+```bash
+jlacompress -n
 ```
 
 ## <a name="datafiles"></a>Data Files ##
@@ -155,8 +155,8 @@ The package source directory `libsncompress` can be used directly without
 installation.  The package and script can also be installed using the standard 
 `distutils` setup script:
 
-```console
-$ python setup.py install
+```bash
+python setup.py install
 ```
 
 ## Requirements ##
