@@ -196,8 +196,7 @@ Please report problems via the [issue tracker][issues].
 [scipy]: https://www.scipy.org/ "SciPy homepage"
 [pyfits]: https://pythonhosted.org/pyfits/ "PyFITS"
 [ct]: https://pythonhosted.org/cachetools/ "cachetools"
-[issues]: https://gitlab.com/congma/libsncompress/issues "Project issue 
-tracker"
+[issues]: https://gitlab.com/congma/libsncompress/issues "Issue tracker"
 
 <!--
 vim: ft=markdown tw=78 fo+=tqwn spell spelllang=en
