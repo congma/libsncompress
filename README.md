@@ -182,6 +182,10 @@ create acceptable initial value and scaling that is optimized for the
 *default* compression used in the [JLA paper][jla].  The automatic initial 
 value and scaling are not optimized for any other usage cases.
 
+## Issue Tracker ##
+
+Please report problems via the [issue tracker][issues].
+
 
 [m16]: http://example.com/ "Foo"
 [jla]: http://arxiv.org/abs/1401.4064 "JLA reference paper"
@@ -192,6 +196,7 @@ value and scaling are not optimized for any other usage cases.
 [scipy]: https://www.scipy.org/ "SciPy homepage"
 [pyfits]: https://pythonhosted.org/pyfits/ "PyFITS"
 [ct]: https://pythonhosted.org/cachetools/ "cachetools"
+[issues]: https://gitlab.com/congma/libsncompress "Project issue tracker"
 
 <!--
 vim: ft=markdown tw=78 fo+=tqwn spell spelllang=en
