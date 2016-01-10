@@ -167,6 +167,7 @@ class BinnedSN(object):
             self.bins = binning.BinCollection(_create_default_logbins())
         else:
             self.bins = binning.BinCollection(logbins)
+        self._cpcache = list(self.bins.itercontrolpoints())
         basematrix = loadcovbase(basedirpath)
         # Symmetrize?
         basematrix = (basematrix + basematrix.T) / 2.0

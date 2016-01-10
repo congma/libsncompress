@@ -24,21 +24,21 @@ def _initial_guess(base):
     return numpy.concatenate((nuis_guess, dist_guess))
 
 
-def _scale_guess(nbins):
-    dsize = nbins + 1
+def _scale_guess(cplist):
     nuis_guess = numpy.array((0.1, 1.3, 0.4))
+    width = numpy.log10(1.3) + 2.0
+    x = map(lambda v: (v + 2.0) / width, cplist)
     l2 = numpy.log(2.0)
     l4 = l2 * 2.0
     k1 = -l4 / 0.618
-    k2 = l4 / (1.0 - 0.618)
-    def intp(i):
-        x = float(i) / nbins
-        if x < 0.618:
-            y = l2 + k1 * x
+    k2 = l4 / 0.382
+    def intp(t):
+        if t < 0.618:
+            y = l2 + k1 * t
         else:
-            y = -l2 + k2 * (x - 0.618)
+            y = -l2 + k2 * (t - 0.618)
         return y
-    dist_guess = numpy.exp(numpy.array([intp(i) for i in xrange(dsize)]))
+    dist_guess = numpy.exp(numpy.array(map(intp, x)))
     return numpy.concatenate((nuis_guess, dist_guess))
 
 
@@ -310,7 +310,7 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
         if x0 is None:
             x0 = _initial_guess(self.base)
         if xscalings is None:
-            local_scalings = _scale_guess(self.base.bins.nbins)
+            local_scalings = _scale_guess(self.base._cpcache)
         else:
             local_scalings = xscalings
         assert local_scalings.shape == x0.shape
