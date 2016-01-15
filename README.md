@@ -55,6 +55,12 @@ The file names are `mean.txt`, `cov.txt` and `redshift.txt` respectively, but
 they can be prefixed by arbitrary strings specified by the user with the 
 `-p`/`--prefix` option.
 
+The first three lines in `mean.txt` are post-compression estimates of best-fit 
+parameters for standardization parameters, in the order of `alpha`, `beta` and 
+`delta`.  The rest of the lines are for the compressed distance modulus at 
+each control point, in the order of increasing redshift.  In `cov.txt`, the 
+rows and columns are in the same order.
+
 If the prefix contains slash (`/`) characters, it will be understood as 
 directory separators.  The files will fail to write to their paths if the 
 nested directory paths do not exist.
