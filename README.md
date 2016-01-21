@@ -186,15 +186,23 @@ python setup.py install
 *  [`scipy`][scipy] (`>= 0.11.0`), for linear algebra and numerical 
    optimization;
 *  [`pyfits`][pyfits] (unknown version), for loading FITS files;
-*  [`cachetools`][ct] (unknown version), for efficient cache management.
+*  [`cachetools`][ct] (unknown version), for caching partial evaluation 
+   results, which is essential for compression speed.
 
 ## Performance Notes ##
 
 Performance is mostly determined by the following two conditions:
 
 1.  Underlying <abbr title="Basic Linear Algebra 
-    Subprograms">BLAS</abbr>/LAPACK libraries used by `numpy`/`scipy`;
-2.  Choice of initial value and scaling for numerical optimization.
+    Subprograms">BLAS</abbr>/LAPACK libraries used by `numpy`/`scipy`, 
+    especially the "linear solver by Cholesky decomposition", `(D)POTRS` 
+    function of LAPACK.  For [NetLib LAPACK][netliblapack], this in turn is
+    largely determined by the speed of the level-3 BLAS triangular solver, 
+    `(D)TRSM`.  The NetLib reference implementation is rather naive, and an 
+    optimized implementation of BLAS is likely to boost the performance.
+2.  Choice of initial value and scaling for numerical optimization.  If 
+    they are suitably chosen, the number of iterations required to achieve 
+    convergence is reduced.
 
 The script [`jlacompress`](scripts/jlacompress) attempts to automatically 
 create acceptable initial value and scaling that is optimized for the 
@@ -216,6 +224,7 @@ Please report problems via the [issue tracker][issues].
 [pyfits]: https://pythonhosted.org/pyfits/ "PyFITS"
 [ct]: https://pythonhosted.org/cachetools/ "cachetools"
 [issues]: https://gitlab.com/congma/libsncompress/issues "Issue tracker"
+[netliblapack]: http://www.netlib.org/lapack/ "NetLib LAPACK"
 
 <!--
 vim: ft=markdown tw=78 fo+=tqwn spell spelllang=en
