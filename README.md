@@ -103,20 +103,33 @@ The following *two* files must be downloaded:
 
 ## Hacking ##
 
-To use the package directly in your own Python program, simply `import 
-libsncompress`.
+To use the package directly in your own Python program, simply
+
+```python
+import libsncompress
+```
+
+This will import three classes from its sub-modules into the `libsncompress` 
+namespace:
+
+*  `BinnedSN`:  data-file loader and pre-processor
+*  `BinCollection`:  redshift binning and sanitizer; not very useful on its 
+   own
+*  `CovEvaluator`:  the actual compressor
 
 The first thing you need to do is to specify a list (or `numpy` array) of 
 control points, by their *base-10 logarithm* values.  Currently, due to 
 development legacy, the "binning" class and methods are not particularly 
-efficient.
+efficient.  This is usually not a problem because it will be used only once.
 
 This list or array of control points must be encapsulate in *another* 
 container (list, array tuple) before passing to the initializer of 
 `libsncompress.BinnedSN` class.  The instance can be initialized by
 
 ```python
-binned_sn = BinnedSN(basedirpath, tablepath, logbins=control_points)
+binned_sn = libsncompress.BinnedSN(basedirpath,
+                                   tablepath,
+				   logbins=control_points)
 ```
 
 Here `basedirpath` is the path to the directory containing the FITS covariance 
@@ -128,7 +141,7 @@ class, which implements the evaluation of probability log-density functions
 and their first 2 derivatives, like this:
 
 ```python
-ev = CovEvaluator(binned_sn, withlogdet=True)
+ev = libsncompress.CovEvaluator(binned_sn, withlogdet=True)
 ```
 
 The optional argument `withlogdet` controls whether the full effect of 
