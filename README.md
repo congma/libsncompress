@@ -129,7 +129,7 @@ container (list, array tuple) before passing to the initializer of
 ```python
 binned_sn = libsncompress.BinnedSN(basedirpath,
                                    tablepath,
-				   logbins=control_points)
+                                   logbins=control_points)
 ```
 
 Here `basedirpath` is the path to the directory containing the FITS covariance 
