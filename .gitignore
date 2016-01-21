@@ -1,8 +1,11 @@
 # FITS data files
 *.fits
 
-# Arbitrary compressed data files
+# Arbitrary archive data files
 *.gz
+*.tar
+*.tgz
+*.bz2
 
 # Generated data files
 *cov*.txt
