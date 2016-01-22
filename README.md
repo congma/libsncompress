@@ -227,5 +227,5 @@ Please report problems via the [issue tracker][issues].
 [netliblapack]: http://www.netlib.org/lapack/ "NetLib LAPACK"
 
 <!--
-vim: ft=markdown tw=78 fo+=tqwn spell spelllang=en
+vim: ft=markdown tw=78 fo+=tqwn spell spelllang=en et ts=4
 -->
