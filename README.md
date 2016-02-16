@@ -123,7 +123,7 @@ development legacy, the "binning" class and methods are not particularly
 efficient.  This is usually not a problem because it will be used only once.
 
 This list or array of control points must be encapsulate in *another* 
-container (list, array tuple) before passing to the initializer of 
+container (list, array, or tuple, etc.) before passing to the initializer of 
 `libsncompress.BinnedSN` class.  The instance can be initialized by
 
 ```python
@@ -193,13 +193,13 @@ python setup.py install
 
 Performance is mostly determined by the following two conditions:
 
-1.  Underlying <abbr title="Basic Linear Algebra 
-    Subprograms">BLAS</abbr>/LAPACK libraries used by `numpy`/`scipy`, 
-    especially the "linear solver by Cholesky decomposition", `(D)POTRS` 
-    function of LAPACK.  For [NetLib LAPACK][netliblapack], this in turn is
-    largely determined by the speed of the level-3 BLAS triangular solver, 
-    `(D)TRSM`.  The NetLib reference implementation is rather naive, and an 
-    optimized implementation of BLAS is likely to boost the performance.
+1.  Underlying <abbr title="Basic Linear Algebra Subprograms">BLAS</abbr>/LAPACK
+    libraries used by `numpy`/`scipy`, especially the "linear solver by 
+    Cholesky decomposition", `(D)POTRS` function of LAPACK.  For [NetLib 
+    LAPACK][netliblapack], this in turn is largely determined by the speed of 
+    the level-3 BLAS triangular solver, `(D)TRSM`.  The NetLib reference 
+    implementation is rather naive, and an optimized implementation of BLAS is 
+    likely to boost the performance.
 2.  Choice of initial value and scaling for numerical optimization.  If 
     they are suitably chosen, the number of iterations required to achieve 
     convergence is reduced.
