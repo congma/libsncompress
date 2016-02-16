@@ -339,7 +339,6 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
                                       *otherargs, **kwargs)
         res["x"] *= local_scalings
         res["fun"] /= fscaling
-        # FIXME this is wrong;  should try-pass individually
         try:
             res["jac"] /= local_scalings * fscaling
         except KeyError:
