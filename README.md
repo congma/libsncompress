@@ -27,7 +27,8 @@ Files](#data-files) for details.
 ### Options ###
 
 *  `-h`, `--help`: show help message and exit 
-*  `-d DIR`, `--covdir DIR`:  path to directory of FITS covariance files 
+*  `-d DIR`, `--covdir DIR`:  path to directory of <abbr
+   title="Flexible Image Transport System">FITS</abbr> covariance files 
    (default: `./covmat`)
 *  `-t FILE`, `--table FILE`: path to JLA data table file (default: 
    `./jla_lcparams.txt`)
@@ -96,10 +97,9 @@ The following *two* files must be downloaded:
     containing the file `data/jla_lcparams.txt`.  This file contains the 
     supernova sample catalogue.  The other files in this archive are not 
     necessary.
-2.  The <abbr title="Flexible Image Transport System">FITS</abbr> files 
-    containing the components of data covariance, in the compressed archive 
-    [`covmat_v6.tgz`][jlafits].  The non-FITS files in this archive are not 
-    necessary.
+2.  The FITS files containing the components of data covariance, in the 
+    compressed archive [`covmat_v6.tgz`][jlafits].  The non-FITS files in this 
+    archive are not necessary.
 
 ## Hacking ##
 
