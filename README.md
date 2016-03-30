@@ -214,7 +214,7 @@ value and scaling are not optimized for any other usage cases.
 Please report problems via the [issue tracker][issues].
 
 
-[m16]: http://example.com/ "Foo"
+[m16]: http://arxiv.org/abs/1603.08519 "The M16 paper (preprint)"
 [jla]: http://arxiv.org/abs/1401.4064 "JLA reference paper"
 [jlarm]: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html "JLA project"
 [jlatarball]: http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz
