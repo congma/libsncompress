@@ -171,6 +171,12 @@ exposed API, are likely to see significant revisions in the future.
 
 ## Installation ##
 
+To obtain the package, you can clone the repository using `git`:
+
+```bash
+git clone https://gitlab.com/congma/libsncompress.git
+```
+
 The package source directory [`libsncompress`](libsncompress/) can be used 
 directly without installation.  The package and script can also be installed 
 using the standard `distutils` setup script:
