@@ -1,6 +1,7 @@
 # FITS data files
 *.fits
 *.fit
+*.fz
 
 # Arbitrary archive data files
 *.gz
@@ -8,6 +9,7 @@
 *.tgz
 *.bz2
 *.bzip2
+*.xz
 
 # Generated data files
 *cov*.txt
