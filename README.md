@@ -6,8 +6,12 @@ data.
 ## Description ##
 
 The Python package `libsncompress` implements the linear compression method
-described in the paper [Ma et al. (2016)][m16].  It is designed for use with
-the [JLA][jla] dataset, but can be easily extended for other similar datasets.
+described in the paper "Application of Bayesian graphs to SN Ia data analysis
+and compression" (C. Ma, P.-S. Corasaniti, & B. A. Bassett, 2016,
+[MNRAS, submitted][m16], "M16"; accepted version <abbr
+title="Digital Object Identifier">DOI</abbr>:
+[`10.1093/mnras/stw2069`][m16a]).  It is designed for use with the [JLA][jla]
+dataset, but can be easily extended for other similar datasets.
 
 It also includes a Python executable script, 
 [`jlacompress`](scripts/jlacompress), that serves as an example command-line 
@@ -221,6 +225,7 @@ Please report problems via the [issue tracker][issues].
 
 
 [m16]: http://arxiv.org/abs/1603.08519 "The M16 paper (preprint)"
+[m16a]: https://dx.doi.org/10.1093/mnras/stw2069 "The M16 paper (accepted version, subscription required)"
 [jla]: http://arxiv.org/abs/1401.4064 "JLA reference paper"
 [jlarm]: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html "JLA project"
 [jlatarball]: http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz
