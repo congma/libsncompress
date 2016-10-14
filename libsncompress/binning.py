@@ -215,7 +215,7 @@ def validatechain(chaincandidate):
 
 
 def pairwise(iterable):
-    """Take straight out of Python Library Reference.
+    """Taken straight out of Python Library Reference.
     s -> (s0, s1), (s1, s2), ...
     """
     a, b = itertools.tee(iterable)
