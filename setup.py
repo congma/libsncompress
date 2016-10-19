@@ -9,5 +9,5 @@ setup(name=pname, version="0.0.1",
       url="https://gitlab.com/congma/libsncompress/",
       packages=[pname],
       scripts=["scripts/jlacompress"],
-      requires=["numpy (>=1.6.0)", "scipy (>=0.11.0)", "pyfits", "cachetools"],
+      requires=["numpy (>=1.6.0)", "scipy (>=0.11.0)", "astropy", "cachetools"],
       provides=[pname])

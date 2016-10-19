@@ -4,7 +4,7 @@
 import os.path
 import collections
 import numpy
-import pyfits
+from astropy.io import fits
 from . import binning
 
 
@@ -37,7 +37,7 @@ def loadcovbase(dirpath):
     tmp = []
     for basename in os.listdir(dirpath):
         if basename.endswith(".fits"):
-            fitsfile = pyfits.open(os.path.join(dirpath, basename))
+            fitsfile = fits.open(os.path.join(dirpath, basename))
             tmp.append(numpy.asarray(fitsfile[0].data))
             fitsfile.close()
     if not tmp:     # Data absent
