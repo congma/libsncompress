@@ -195,7 +195,9 @@ python setup.py install
    operations;
 *  [`scipy`][scipy] (`>= 0.11.0`), for linear algebra and numerical 
    optimization;
-*  [`pyfits`][pyfits] (unknown version), for loading FITS files;
+*  [`astropy`][astropy] (unknown version), for loading FITS files with the
+   `astropy.io.fits` module, which replaces the dependence on
+   [`pyfits`][pyfits] in earlier versions;
 *  [`cachetools`][ct] (unknown version), for caching partial evaluation 
    results, which is essential for compression speed.
 
@@ -232,6 +234,7 @@ Please report problems via the [issue tracker][issues].
 [jlafits]: http://supernovae.in2p3.fr/sdss_snls_jla/covmat_v6.tgz
 [numpy]: http://www.numpy.org/ "NumPy homepage"
 [scipy]: https://www.scipy.org/ "SciPy homepage"
+[astropy]: http://www.astropy.org/ "Astropy homepage"
 [pyfits]: https://pythonhosted.org/pyfits/ "PyFITS"
 [ct]: https://pythonhosted.org/cachetools/ "cachetools"
 [issues]: https://gitlab.com/congma/libsncompress/issues "Issue tracker"
