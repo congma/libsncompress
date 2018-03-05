@@ -1,0 +1,20 @@
+before_script:
+  - apt-get update -qq && apt-get install -y -qq \
+                                          python python3 \
+                                          python-pip python3-pip \
+                                          python-numpy python3-numpy \
+                                          python-scipy python3-scipy \
+                                          python-astropy python3-astropy \
+                                          python-pytest python3-pytest \
+                                          tox
+
+stages:
+  - smoketest
+
+job_smoketest:
+  stage: smoketest
+  script:
+    - tox -c smoketest-tox.ini
+  tags:
+    - shared
+

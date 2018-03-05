@@ -1,3 +1,5 @@
+[![pipeline status](https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg)](https://gitlab.com/congma/libsncompress/commits/master)
+
 ## Summary ##
 
 `libsncompress` -- a Python utility for compressing supernova cosmological 
