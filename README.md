@@ -18,6 +18,8 @@ It also includes a Python executable script,
 [`jlacompress`](scripts/jlacompress), that serves as an example command-line 
 user interface.
 
+The programs work with both Python 2.7 and 3.6.
+
 ## JLA Compression Script ##
 
 ### Synopsis ###
@@ -188,6 +190,12 @@ using the standard `distutils` setup script:
 
 ```bash
 python setup.py install
+```
+
+Alternatively, `pip` can be invoked to install the package and dependencies:
+
+```bash
+pip install -r requirements.txt .
 ```
 
 ## Requirements ##
