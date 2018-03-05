@@ -192,6 +192,7 @@ python setup.py install
 
 ## Requirements ##
 
+*  [`six`][six] (unknown version), for Python 2 and 3 compatibility;
 *  [`numpy`][numpy] (`>= 1.6.0`), for array data structure and basic 
    operations;
 *  [`scipy`][scipy] (`>= 0.11.0`), for linear algebra and numerical 
@@ -234,6 +235,7 @@ Please report problems via the [issue tracker][issues].
 [jlarm]: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html "JLA project"
 [jlatarball]: http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz
 [jlafits]: http://supernovae.in2p3.fr/sdss_snls_jla/covmat_v6.tgz
+[six]: https://pythonhosted.org/six/ "six: Python 2 and 3 compatibility library"
 [numpy]: http://www.numpy.org/ "NumPy homepage"
 [scipy]: https://www.scipy.org/ "SciPy homepage"
 [astropy]: http://www.astropy.org/ "Astropy homepage"

@@ -27,18 +27,19 @@ def _initial_guess(base):
 def _scale_guess(cplist):
     nuis_guess = numpy.array((0.1, 1.3, 0.4))
     width = numpy.log10(1.3) + 2.0
-    x = map(lambda v: (v + 2.0) / width, cplist)
+    x = numpy.array([(v + 2.0) / width for v in cplist])
     l2 = numpy.log(2.0)
     l4 = l2 * 2.0
     k1 = -l4 / 0.618
     k2 = l4 / 0.382
+    @numpy.vectorize
     def intp(t):
         if t < 0.618:
             y = l2 + k1 * t
         else:
             y = -l2 + k2 * (t - 0.618)
         return y
-    dist_guess = numpy.exp(numpy.array(map(intp, x)))
+    dist_guess = numpy.exp(intp(x))
     return numpy.concatenate((nuis_guess, dist_guess))
 
 

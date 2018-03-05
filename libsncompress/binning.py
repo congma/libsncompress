@@ -1,6 +1,7 @@
 # vim: spell spelllang=en
 
 import itertools
+import six.moves as sm
 
 
 class BinCollection(object):
@@ -207,7 +208,7 @@ def validatechain(chaincandidate):
     if lchain < 2:
         raise ValueError("Chain too small: %s" % sortedchain)
     # Check for duplication within chain
-    for i in xrange(lchain - 1):
+    for i in sm.range(lchain - 1):
         if sortedchain[i] == sortedchain[i + 1]:
             raise ValueError("Duplicate item in chain: %s" %
                              sortedchain)
@@ -220,7 +221,7 @@ def pairwise(iterable):
     """
     a, b = itertools.tee(iterable)
     next(b, None)
-    return itertools.izip(a, b)
+    return sm.zip(a, b)
 
 
 def areoverlapping(left, right):

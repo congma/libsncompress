@@ -2,9 +2,14 @@
 import sys
 import os.path
 import argparse
+from six import print_
 import numpy
 import scipy.linalg
 from libsncompress import base, evaluator
+
+
+def _info(text, stream=sys.stderr):
+    print_(text, file=stream)
 
 
 def unique(list_of_floats):
@@ -56,14 +61,14 @@ npars = nnuis + n.bins.ncontrolpoints
 ce = evaluator.CovEvaluator(n, withlogdet=(not optns.no_logdet))
 res = ce.minimize(method="trust-ncg", options={})
 if optns.verbose:
-    print >> sys.stderr, res
+    _info(res)
 if not res["success"]:
-    print >> sys.stderr, "error: failed to find optimal parameters"
-    print >> sys.stderr, "the message was: %s" % res["message"]
+    _info("error: failed to find optimal parameters")
+    _info("the message was: %s" % res["message"])
     sys.exit(1)
 else:
     if optns.verbose:
-        print >> sys.stderr, "info: success"
+        _info("info: success")
 
 hess = ce.chisqhess(res["x"])
 hessfac = scipy.linalg.cho_factor(hess, check_finite=False)
