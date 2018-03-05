@@ -3,6 +3,7 @@
 
 import os.path
 import collections
+import six.moves as sm
 import numpy
 from astropy.io import fits
 from . import binning
@@ -25,7 +26,7 @@ def _preeval_diag_in_cov(redshifts, setnum):
     tsize = redshifts.shape[0]
     diag = numpy.square(_COEFF_SIGMAZ / redshifts)      # Peculiar redshift
     diag += numpy.square(redshifts * 0.055)             # Lensing
-    for i in xrange(tsize):                             # Intrinsic
+    for i in sm.range(tsize):                           # Intrinsic
         diag[i] += _SIGMA_COH_TABLE[setnum[i]] ** 2
     return diag
 
@@ -108,8 +109,8 @@ def _create_base_block(ids, basematrix):
         mids.extend([t, t + 1, t + 2])
     section = basematrix[numpy.ix_(mids, mids)]
     bblock = numpy.empty((3, 3, len(ids), len(ids)))
-    for i in xrange(3):
-        for j in xrange(3):
+    for i in sm.range(3):
+        for j in sm.range(3):
             p = section[i::3, j::3]
             bblock[i][j] = p
     return numpy.ascontiguousarray(bblock)
@@ -207,7 +208,7 @@ class BinnedSN(object):
             data ids that are in the kth bin.
         """
         rev = collections.defaultdict(set)
-        for dataid in xrange(self.datadimension):
+        for dataid in sm.range(self.datadimension):
             binid = self.binnings[dataid][0]
             rev[binid].add(dataid)
         return rev

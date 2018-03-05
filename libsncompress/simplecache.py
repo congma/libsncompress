@@ -24,6 +24,7 @@ For your class to benefit from this memoization decorator, it must first
 inherit from our ArrayMethodCacheMixin class alongside with its other parent
 classes.  After that, you can use the memoized() function to create decorators
 that decorate your methods.  For example:
+>>> from six.moves import range
 >>> import numpy
 >>> class A(ArrayMethodCacheMixin, object):
 ...     v = 4.2
@@ -34,7 +35,7 @@ that decorate your methods.  For example:
 ...         # Lengthy, expensive, and phony calculations...
 ...         tmp = array.copy()
 ...         p = numpy.outer(array, array)
-...         for i in xrange(1000000):
+...         for i in range(1000000):
 ...             tmp += numpy.dot(p, array)
 ...         return tmp + self.v
 ... 
@@ -50,12 +51,18 @@ instantiating A:
 >>> numpy.set_printoptions(precision=1)
 
 The following call, when first invoked, will hang for a while:
->>> print ta.frob(x)    # doctest: +NORMALIZE_WHITESPACE
-[ 14000005.2  28000006.2  42000007.2]
+>>> for v in ta.frob(x):
+...     print(v)         # doctest: +NORMALIZE_WHITESPACE
+14000005.2
+28000006.2
+42000007.2
 
 But subsequent calls with the same argument will be very fast:
->>> print ta.frob(x)    # doctest: +NORMALIZE_WHITESPACE
-[ 14000005.2  28000006.2  42000007.2]
+>>> for v in ta.frob(x):
+...     print(v)         # doctest: +NORMALIZE_WHITESPACE
+14000005.2
+28000006.2
+42000007.2
 
 At this moment, if you wish, you can access the actual cache via the
 _cachedict attribute, but manual handling of the cache is not recommended.
@@ -63,15 +70,15 @@ _cachedict attribute, but manual handling of the cache is not recommended.
 {'frob': LRUCache(..., maxsize=32, currsize=1)}
 
 After the first call to ta.spam(), it will have its own cache, too:
->>> print "%.1f" % ta.spam(x)
+>>> print("%.1f" % ta.spam(x))
 2744002861600508.0
->>> items = ta._cachedict.items()
+>>> items = list(ta._cachedict.items())
 >>> items.sort()
->>> print items         # doctest: +ELLIPSIS, +NORMALIZE_WHITESPACE
+>>> print(items)         # doctest: +ELLIPSIS, +NORMALIZE_WHITESPACE
 [('frob', LRUCache(..., maxsize=32, currsize=1)), ('spam', LFUCache(...))]
 
 Docstring of the decorated method is preserved as-is:
->>> print ta.frob.__doc__
+>>> print(ta.frob.__doc__)
 Docstring for method frob is preserved.
 
 Author: Cong Ma <cong.ma@obspm.fr>, (c) 2015.  See the file COPYING.
@@ -90,9 +97,8 @@ class NumKeyLite(object):
     """
 
     __slots__ = ("hashfcn", "__value", "__oldw", "__h", "__weakref__")
-    hashfcn = hash
 
-    def __init__(self, array, *args, **kwargs):
+    def __init__(self, array, hashfcn=hash, *nparray_args, **nparray_kwargs):
         """NumKeyLite(array, *args, **kwargs) -- create key from
         numpy.ndarray instance other.
 
@@ -110,12 +116,13 @@ class NumKeyLite(object):
         attempt to manually set the array to writeable in this case.
         Especially not during the creation of NumKeyLite objects!
         """
-        self.__value = numpy.asarray(array, *args, **kwargs)
+        self.hashfcn = hashfcn
+        self.__value = numpy.asarray(array, *nparray_args, **nparray_kwargs)
         # As long as we're holding the reference to key, we make it read-only,
         # so that the key cannot be modified.
         self.__oldw = self.__value.flags.writeable
         self.__value.flags.writeable = False
-        self.__h = self.hashfcn(self.__value.data)
+        self.__h = hashfcn(self.__value.tobytes())
         return None
 
     def __hash__(self):
@@ -125,7 +132,7 @@ class NumKeyLite(object):
         """Test whether the underlying data is bytewise-equal."""
         # NOTE: This is debatable.
         try:
-            return self.__value.data == other.__value.data
+            return self.__value.tobytes() == other.__value.tobytes()
         except AttributeError:
             raise TypeError("Not knowing how to compare.")
 
