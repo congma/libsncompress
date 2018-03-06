@@ -14,7 +14,7 @@ before_script:
 stages:
   - smoketests
 
-job_smoketest:
+job_smoketests:
   stage: smoketests
   script:
     - tox -c gitlab.com-ci-smoketests-tox.ini
