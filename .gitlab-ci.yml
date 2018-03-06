@@ -12,19 +12,11 @@ before_script:
                                           tox
 
 stages:
-  - smoketest
-  - test_with_data
+  - smoketests
 
 job_smoketest:
-  stage: smoketest
+  stage: smoketests
   script:
-    - tox -c smoketest-tox.ini
-  tags:
-    - shared
-
-job_test_with_data:
-  stage: test_with_data
-  script:
-    - tox -c test_with_data-tox.ini
+    - tox -c gitlab.com-ci-smoketests-tox.ini
   tags:
     - shared
