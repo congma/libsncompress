@@ -9,12 +9,12 @@ data.
 
 The Python package `libsncompress` implements the linear compression method
 described in the paper "Application of Bayesian graphs to SN Ia data analysis
-and compression" (C. Ma, P.-S. Corasaniti, & B. A. Bassett, 2016,
-[MNRAS, submitted][m16], "M16"; accepted version: 2016 MNRAS, 463, 1651, <abbr
-title="Digital Object Identifier">DOI</abbr>:
-[`10.1093/mnras/stw2069`][m16a], BibCode: [`2016MNRAS.463.1651M`][m16ads]).  
-It is designed for use with the [JLA][jla]
-dataset, but can be easily extended for other similar datasets.
+and compression" (C.&nbsp;Ma, P.-S.&nbsp;Corasaniti, & 
+B.&nbsp;A.&nbsp;Bassett, 2016, [MNRAS, submitted][m16], "M16"; accepted 
+version: 2016 MNRAS, 463, 1651, <abbr
+title="Digital Object Identifier">DOI</abbr>: [`10.1093/mnras/stw2069`][m16a], 
+BibCode: [`2016MNRAS.463.1651M`][m16ads]).  It is designed for use with the 
+[JLA][jla] dataset, but can be easily extended for other similar datasets.
 
 It also includes a Python executable script, 
 [`jlacompress`](scripts/jlacompress), that serves as an example command-line 
@@ -22,7 +22,40 @@ user interface.
 
 The programs work with both Python 2.7 and 3.6.
 
+
+## Installation ##
+
+To obtain the package, you can clone the repository using `git`:
+
+```bash
+git clone https://gitlab.com/congma/libsncompress.git
+```
+
+Additional Python packages are required (please refer to the section 
+"[Requirements](#requirements)" for the list of dependencies of the current 
+version). To take care of them, `pip` can be invoked to install the package 
+and dependencies from the source directory:
+
+```bash
+pip install -r requirements.txt .
+```
+
+Alternatively, the package and script can also be installed using the standard 
+`distutils` setup script, which will proceed without obtaining dependencies 
+first:
+
+```bash
+python setup.py install
+```
+
+It is possible to use the library package `libsncompress` without 
+installation, for example, by including them directly in your own project.
+
+
 ## JLA Compression Script ##
+
+This utility comes with an executable script `jlacompress` that is tailored to 
+the compression of the [JLA][jla] dataset, as done in our [M16][m16] paper.
 
 ### Synopsis ###
 
@@ -85,7 +118,7 @@ written to the standard error.
 
 The script exits with `0` for success.  Any other value indicates error.
 
-### Example ###
+### Example Usage ###
 
 Assuming the data files are in their default locations, the following command 
 reproduces the default compression results in the [JLA paper][jla].
@@ -93,6 +126,7 @@ reproduces the default compression results in the [JLA paper][jla].
 ```bash
 jlacompress -n
 ```
+
 
 ## Data Files ##
 
@@ -110,9 +144,10 @@ The following *two* files must be downloaded:
     compressed archive [`covmat_v6.tgz`][jlafits].  The non-FITS files in this 
     archive are not necessary.
 
+
 ## Hacking ##
 
-To use the package directly in your own Python program, simply
+To use the package directly in your own Python project, simply
 
 ```python
 import libsncompress
@@ -178,27 +213,6 @@ It specifically implements the sawtooth-basis compression, which is compatible
 with the original [JLA one][jla].  The implementation details, as well as the 
 exposed API, are likely to see significant revisions in the future.
 
-## Installation ##
-
-To obtain the package, you can clone the repository using `git`:
-
-```bash
-git clone https://gitlab.com/congma/libsncompress.git
-```
-
-The package source directory [`libsncompress`](libsncompress/) can be used 
-directly without installation.  The package and script can also be installed 
-using the standard `distutils` setup script:
-
-```bash
-python setup.py install
-```
-
-Alternatively, `pip` can be invoked to install the package and dependencies:
-
-```bash
-pip install -r requirements.txt .
-```
 
 ## Requirements ##
 
@@ -212,6 +226,7 @@ pip install -r requirements.txt .
    [`pyfits`][pyfits] in earlier versions;
 *  [`cachetools`][ct] (unknown version), for caching partial evaluation 
    results, which is essential for compression speed.
+
 
 ## Performance Notes ##
 
@@ -233,13 +248,41 @@ create acceptable initial value and scaling that is optimized for the
 *default* compression used in the [JLA paper][jla].  The automatic initial 
 value and scaling are not optimized for any other usage cases.
 
+
 ## Issue Tracker ##
 
 Please report problems via the [issue tracker][issues].
 
 
+## Bibliography ##
+
+If you use this program in your research, we would like to suggest you cite 
+the following paper ("M16"):
+
+Ma, C., Corasaniti, P.-S., & Bassett, B.&nbsp;A. 2016, MNRAS, 463, 1651,
+[`doi: 10.1093/mnras/stw2069`][m16a]
+
+The following BibTeX entry could be useful in a LaTeX document:
+
+```
+@ARTICLE{2016MNRAS.463.1651M,
+   author = {{Ma}, C. and {Corasaniti}, P.-S. and {Bassett}, B.~A.},
+    title = "{Application of Bayesian graphs to SN Ia data analysis and compression}",
+  journal = {MNRAS},
+archivePrefix = "arXiv",
+   eprint = {1603.08519},
+ keywords = {cosmological parameters, distance scale, methods: data analysis, methods: statistical, supernovae: general, cosmolo-gical parameters},
+     year = 2016,
+    month = dec,
+   volume = 463,
+    pages = {1651-1665},
+      doi = {10.1093/mnras/stw2069}
+}
+```
+
+
 [m16]: http://arxiv.org/abs/1603.08519 "The M16 paper (preprint)"
-[m16a]: https://dx.doi.org/10.1093/mnras/stw2069 "The M16 paper (accepted version, subscription required)"
+[m16a]: https://doi.org/10.1093/mnras/stw2069 "The M16 paper (accepted version, subscription required)"
 [m16ads]: http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M "The M16 paper's entry in SAO/NASA ADS"
 [jla]: http://arxiv.org/abs/1401.4064 "JLA reference paper"
 [jlarm]: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html "JLA project"
