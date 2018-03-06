@@ -2,7 +2,7 @@
 from distutils.core import setup
 
 pname = "libsncompress"
-setup(name=pname, version="0.0.1",
+setup(name=pname, version="0.0.3",
       description="Compress JLA-like supernova data",
       author="Cong Ma",
       author_email="cong.ma@obspm.fr",
