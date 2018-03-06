@@ -1,4 +1,4 @@
-image: ubuntu:artful
+image: "registry.gitlab.com/congma/libsncompress/with-realdata:latest"
 
 before_script:
   - |
@@ -13,6 +13,7 @@ before_script:
 
 stages:
   - smoketest
+  - test_with_data
 
 job_smoketest:
   stage: smoketest
@@ -21,3 +22,9 @@ job_smoketest:
   tags:
     - shared
 
+job_test_with_data:
+  stage: test_with_data
+  script:
+    - tox -c test_with_data-tox.ini
+  tags:
+    - shared
