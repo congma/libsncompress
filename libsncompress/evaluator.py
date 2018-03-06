@@ -18,8 +18,7 @@ def _initial_guess(base):
         slope = 0.0
     else:
         slope = (yf.mean() - yim) / (xf.mean() - xim)
-    pred = lambda x: yim + (x - xim) * slope
-    dist_guess = numpy.array([pred(lz) for lz in
+    dist_guess = numpy.array([yim + (lz - xim) * slope for lz in
                               base.bins.itercontrolpoints()]) + 19.05
     return numpy.concatenate((nuis_guess, dist_guess))
 
@@ -32,6 +31,7 @@ def _scale_guess(cplist):
     l4 = l2 * 2.0
     k1 = -l4 / 0.618
     k2 = l4 / 0.382
+
     @numpy.vectorize
     def intp(t):
         if t < 0.618:
@@ -39,6 +39,7 @@ def _scale_guess(cplist):
         else:
             y = -l2 + k2 * (t - 0.618)
         return y
+
     dist_guess = numpy.exp(intp(x))
     return numpy.concatenate((nuis_guess, dist_guess))
 
@@ -327,25 +328,31 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
             thishess = hess
         init = x0 / local_scalings
         outer = numpy.outer(local_scalings, local_scalings)
-        funwrap = lambda scaled_x: fscaling * self.chisq(scaled_x *
-                                                         local_scalings)
-        gradwrap = lambda scaled_x: (fscaling * thisjac(scaled_x *
-                                                        local_scalings) *
-                                     local_scalings)
-        hesswrap = lambda scaled_x: (fscaling * thishess(scaled_x *
-                                                         local_scalings) *
-                                     outer)
+        # Optimize by pre-computing constants, at the cost of higher memory
+        # footprint.
+        fs_local = fscaling * local_scalings
+        fs_outer = fscaling * outer
+
+        def funwrap(scaled_x):
+            return fscaling * self.chisq(scaled_x * local_scalings)
+
+        def gradwrap(scaled_x):
+            return fs_local * thisjac(scaled_x * local_scalings)
+
+        def hesswrap(scaled_x):
+            return fs_outer * thishess(scaled_x * local_scalings)
+
         res = scipy.optimize.minimize(funwrap, init,
                                       jac=gradwrap, hess=hesswrap,
                                       *otherargs, **kwargs)
         res["x"] *= local_scalings
         res["fun"] /= fscaling
         try:
-            res["jac"] /= local_scalings * fscaling
+            res["jac"] /= fs_local
         except KeyError:
             pass
         try:
-            res["hess"] /= outer * fscaling
+            res["hess"] /= fs_outer
         except KeyError:
             pass
         return res
