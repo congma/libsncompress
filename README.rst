@@ -327,4 +327,4 @@ The following BibTeX entry could be useful in a LaTeX document:
 .. |license| image:: https://img.shields.io/badge/license-BSD-yellow.svg
    :target: https://gitlab.com/congma/libsncompress/blob/master/COPYING
 .. |Python versions| image:: https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg
-
+   :target: #description

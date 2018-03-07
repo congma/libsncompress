@@ -1,6 +1,6 @@
 [![pipeline status](https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg)](https://gitlab.com/congma/libsncompress/commits/master)
 [![license](https://img.shields.io/badge/license-BSD-yellow.svg)](https://gitlab.com/congma/libsncompress/blob/master/COPYING)
-![Python versions](https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg)
+[![Python versions](https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg)](#description)
 
 ## Summary ##
 
