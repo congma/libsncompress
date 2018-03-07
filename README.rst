@@ -74,7 +74,7 @@ tailored to the compression of the
 Synopsis
 ~~~~~~~~
 
-.. code:: bash
+::
 
     jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z [z ...]] [-n] [-v]
 

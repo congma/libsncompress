@@ -66,7 +66,7 @@ the compression of the [JLA][jla] dataset, as done in our [M16][m16] paper.
 
 ### Synopsis ###
 
-```bash
+```
 jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z [z ...]] [-n] [-v]
 ```
 
