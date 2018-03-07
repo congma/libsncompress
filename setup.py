@@ -6,8 +6,15 @@ from setuptools import setup
 import six
 
 
+if six.PY3:
+    def open_utf8(path, mode):
+        return open(path, mode, encoding="utf-8")
+else:
+    open_utf8 = open
+
+
 def get_rst_text_from_md(path):
-    with open(path, "r") as f:
+    with open_utf8(path, "r") as f:
         orig_text = f.read()
     try:
         import pypandoc
@@ -49,7 +56,7 @@ if should_convert_p(from_doc, to_doc):
                     "(You are seeing this because automatic generation of "
                     "``README.rst`` failed.)\n")
 else:
-    with open(to_doc, "r") as f:
+    with open_utf8(to_doc, "r") as f:
         rst_text = f.read()
 
 
