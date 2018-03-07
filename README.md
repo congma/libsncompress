@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg)](https://gitlab.com/congma/libsncompress/commits/master)
+[![pipeline status](https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg)](https://gitlab.com/congma/libsncompress/commits/master) [![license](https://img.shields.io/badge/license-BSD-yellow.svg)](https://gitlab.com/congma/libsncompress/blob/master/COPYING) ![Python versions](https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg)
 
 ## Summary ##
 
@@ -17,8 +17,8 @@ BibCode: [`2016MNRAS.463.1651M`][m16ads]).  It is designed for use with the
 [JLA][jla] dataset, but can be easily extended for other similar datasets.
 
 It also includes a Python executable script, 
-[`jlacompress`](scripts/jlacompress), that serves as an example command-line 
-user interface.
+[`jlacompress`][local-scripts-jlacompress], that serves as an example 
+command-line user interface.
 
 The programs work with both Python 2.7 and 3.6.
 
@@ -59,7 +59,7 @@ the compression of the [JLA][jla] dataset, as done in our [M16][m16] paper.
 
 ### Synopsis ###
 
-```
+```bash
 jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z [z ...]] [-n] [-v]
 ```
 
@@ -243,10 +243,10 @@ Performance is mostly determined by the following two conditions:
     they are suitably chosen, the number of iterations required to achieve 
     convergence is reduced.
 
-The script [`jlacompress`](scripts/jlacompress) attempts to automatically 
-create acceptable initial value and scaling that is optimized for the 
-*default* compression used in the [JLA paper][jla].  The automatic initial 
-value and scaling are not optimized for any other usage cases.
+The script [`jlacompress`][local-scripts-jlacompress] attempts to 
+automatically create acceptable initial value and scaling that is optimized 
+for the *default* compression used in the [JLA paper][jla].  The automatic 
+initial value and scaling are not optimized for any other usage cases.
 
 
 ## Issue Tracker ##
@@ -284,6 +284,7 @@ archivePrefix = "arXiv",
 [m16]: http://arxiv.org/abs/1603.08519 "The M16 paper (preprint)"
 [m16a]: https://doi.org/10.1093/mnras/stw2069 "The M16 paper (accepted version, subscription required)"
 [m16ads]: http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M "The M16 paper's entry in SAO/NASA ADS"
+[local-scripts-jlacompress]: scripts/jlacompress
 [jla]: http://arxiv.org/abs/1401.4064 "JLA reference paper"
 [jlarm]: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html "JLA project"
 [jlatarball]: http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz

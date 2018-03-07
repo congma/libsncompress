@@ -1,14 +1,82 @@
 #!/usr/bin/env python
-from distutils.core import setup
+import sys
+import os
+import errno
+from setuptools import setup
+import six
+
+
+def get_rst_text_from_md(path):
+    with open(path, "r") as f:
+        orig_text = f.read()
+    try:
+        import pypandoc
+    except (OSError, ImportError):
+        # This is the case when pypandoc isn't available.
+        return None
+    # Use PyPandoc to convert the markdown, and overwrite the .rst file
+    return pypandoc.convert_text(orig_text, "rst", "md")
+
+
+def should_convert_p(from_path, to_path):
+    try:
+        stat_to = os.stat(to_path)
+    except OSError as err:
+        if err.errno == errno.ENOENT:
+            # "to_path" does not exist, therefore we should convert.
+            return True
+        # Other kinds of OSError are definitely an error.
+        six.raise_from(IOError, err)
+    stat_from = os.stat(from_path)
+    # If "from_path" is more recent than "to_path", we should convert.
+    return stat_from.st_mtime > stat_to.st_mtime
+
+
+from_doc = "README.md"
+to_doc = "README.rst"
+if should_convert_p(from_doc, to_doc):
+    rst_text = get_rst_text_from_md(from_doc)
+    if rst_text is not None:
+        if six.PY2:
+            rst_text = rst_text.encode("utf-8")
+        with open(to_doc, "w") as f:
+            f.write(rst_text)
+    else:
+        sys.stderr.write("WARNING: Automatic README.rst generation failed.\n"
+                         "         Using placeholder (not written to file).\n")
+        rst_text = ("Please refer to the documentation at the `homepage`_.\n"
+                    ".. _homepage: https://gitlab.com/congma/libsncompress/\n"
+                    "(You are seeing this because automatic generation of "
+                    "``README.rst`` failed.)\n")
+else:
+    with open(to_doc, "r") as f:
+        rst_text = f.read()
+
 
 pname = "libsncompress"
 setup(name=pname, version="0.0.3",
       description="Compress JLA-like supernova data",
+      long_description=rst_text,
       author="Cong Ma",
       author_email="cong.ma@obspm.fr",
       url="https://gitlab.com/congma/libsncompress/",
       packages=[pname],
       scripts=["scripts/jlacompress"],
-      requires=["six", "numpy (>=1.6.0)", "scipy (>=0.11.0)", "astropy",
-                "cachetools"],
-      provides=[pname])
+      install_requires=["six", "numpy >= 1.6.0", "scipy >= 0.11.0", "astropy",
+                        "cachetools"],
+      setup_requires=["six", "pypandoc"],
+      provides=[pname],
+      license="BSD",
+      classifiers=["Development Status :: 4 - Beta",
+                   "Environment :: Console",
+                   "Intended Audience :: Science/Research",
+                   "License :: OSI Approved :: BSD License",
+                   "Operating System :: OS Independent",
+                   "Programming Language :: Python :: 2",
+                   "Programming Language :: Python :: 3",
+                   "Programming Language :: Python :: Implementation :: "
+                   "CPython",
+                   "Topic :: Scientific/Engineering :: Astronomy",
+                   "Topic :: Scientific/Engineering :: Information Analysis",
+                   "Topic :: Software Development :: Libraries :: "
+                   "Python Modules"])
