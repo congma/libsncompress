@@ -24,9 +24,10 @@ stages:
 job_smoketests:
   stage: smoketests
   script:
-    - tox -c gitlab.com-ci-smoketests-tox.ini
+    - tox
   cache:
+    key: "$CI_JOB_STAGE"
     paths:
-     - .tox/
+      - .tox/
   tags:
     - shared
