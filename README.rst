@@ -31,7 +31,8 @@ The programs work with both Python 2.7 and 3.6.
 Installation
 ------------
 
-To obtain the package, you can clone the repository using ``git``:
+To obtain the full package source, you can clone the repository using
+``git``:
 
 .. code:: bash
 
@@ -39,22 +40,26 @@ To obtain the package, you can clone the repository using ``git``:
 
 Additional Python packages are required (please refer to the section
 "`Requirements <#requirements>`__" for the list of dependencies of the
-current version). To take care of them, ``pip`` can be invoked to
-install the package and dependencies from the source directory:
+current version). The recommended installation method is to invoke
+``pip`` from the source directory:
 
 .. code:: bash
 
-    pip install -r requirements.txt .
+    pip install .
+
+You may also supply your own ``requirements.txt`` file that specifies
+the exact versions of dependency packages. An example one is included in
+this repository. For most users, this is unnecessary, and
+``pip install .`` should work fine.
 
 Alternatively, the package and script can also be installed using the
-standard ``distutils`` setup script, which will proceed without
-obtaining dependencies first:
+``setuptools`` setup script:
 
 .. code:: bash
 
     python setup.py install
 
-It is possible to use the library package ``libsncompress`` without
+It is also possible to use the library package ``libsncompress`` without
 installation, for example, by including them directly in your own
 project.
 
