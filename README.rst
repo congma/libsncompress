@@ -14,16 +14,16 @@ method described in the paper "Application of Bayesian graphs to SN Ia
 data analysis and compression" (C. Ma, P.-S. Corasaniti, &
 B. A. Bassett, 2016, `MNRAS,
 submitted <http://arxiv.org/abs/1603.08519>`__, "M16"; accepted version:
-2016 MNRAS, 463, 1651, DOI:
-```10.1093/mnras/stw2069`` <https://doi.org/10.1093/mnras/stw2069>`__,
-BibCode:
-```2016MNRAS.463.1651M`` <http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M>`__).
-It is designed for use with the `JLA <http://arxiv.org/abs/1401.4064>`__
+2016 MNRAS, 463, 1651, DOI: ``10.1093/mnras/stw2069``
+`☞ <https://doi.org/10.1093/mnras/stw2069>`__, BibCode:
+``2016MNRAS.463.1651M``
+`☞ <http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M>`__). It is
+designed for use with the `JLA <http://arxiv.org/abs/1401.4064>`__
 dataset, but can be easily extended for other similar datasets.
 
-It also includes a Python executable script,
-```jlacompress`` <scripts/jlacompress>`__, that serves as an example
-command-line user interface.
+It also includes a Python executable script, ``jlacompress``
+`☞ <scripts/jlacompress>`__, that serves as an example command-line user
+interface.
 
 The programs work with both Python 2.7 and 3.6.
 
@@ -156,15 +156,15 @@ for details about the data files.
 
 The following *two* files must be downloaded:
 
-1. The file
-   ```jla_likelihood_v6.tgz`` <http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz>`__,
+1. The file ``jla_likelihood_v6.tgz``
+   `☞ <http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz>`__,
    compressed archive containing the file ``data/jla_lcparams.txt``.
    This file contains the supernova sample catalogue. The other files in
    this archive are not necessary.
 2. The FITS files containing the components of data covariance, in the
-   compressed archive
-   ```covmat_v6.tgz`` <http://supernovae.in2p3.fr/sdss_snls_jla/covmat_v6.tgz>`__.
-   The non-FITS files in this archive are not necessary.
+   compressed archive ``covmat_v6.tgz``
+   `☞ <http://supernovae.in2p3.fr/sdss_snls_jla/covmat_v6.tgz>`__. The
+   non-FITS files in this archive are not necessary.
 
 Hacking
 -------
@@ -245,20 +245,19 @@ revisions in the future.
 Requirements
 ------------
 
--  ```six`` <https://pythonhosted.org/six/>`__ (unknown version), for
+-  ``six`` (unknown version) `☞ <https://pythonhosted.org/six/>`__, for
    Python 2 and 3 compatibility;
--  ```numpy`` <http://www.numpy.org/>`__ (``>= 1.6.0``), for array data
-   structure and basic operations;
--  ```scipy`` <https://www.scipy.org/>`__ (``>= 0.11.0``), for linear
+-  ``numpy`` (``>= 1.6.0``) `☞ <http://www.numpy.org/>`__, for array
+   data structure and basic operations;
+-  ``scipy`` (``>= 0.11.0``) `☞ <https://www.scipy.org/>`__, for linear
    algebra and numerical optimization;
--  ```astropy`` <http://www.astropy.org/>`__ (unknown version), for
+-  ``astropy`` (unknown version) `☞ <http://www.astropy.org/>`__, for
    loading FITS files with the ``astropy.io.fits`` module, which
-   replaces the dependence on
-   ```pyfits`` <https://pythonhosted.org/pyfits/>`__ in earlier
-   versions;
--  ```cachetools`` <https://pythonhosted.org/cachetools/>`__ (unknown
-   version), for caching partial evaluation results, which is essential
-   for compression speed.
+   replaces the dependence on ``pyfits``
+   `☞ <https://pythonhosted.org/pyfits/>`__ in earlier versions;
+-  ``cachetools`` (unknown version)
+   `☞ <https://pythonhosted.org/cachetools/>`__, for caching partial
+   evaluation results, which is essential for compression speed.
 
 Performance Notes
 -----------------
@@ -277,7 +276,7 @@ Performance is mostly determined by the following two conditions:
    they are suitably chosen, the number of iterations required to
    achieve convergence is reduced.
 
-The script ```jlacompress`` <scripts/jlacompress>`__ attempts to
+The script ``jlacompress`` `☞ <scripts/jlacompress>`__ attempts to
 automatically create acceptable initial value and scaling that is
 optimized for the *default* compression used in the `JLA
 paper <http://arxiv.org/abs/1401.4064>`__. The automatic initial value
@@ -296,7 +295,8 @@ If you use this program in your research, we would like to suggest you
 cite the following paper ("M16"):
 
 Ma, C., Corasaniti, P.-S., & Bassett, B. A. 2016, MNRAS, 463, 1651,
-```doi: 10.1093/mnras/stw2069`` <https://doi.org/10.1093/mnras/stw2069>`__
+``doi: 10.1093/mnras/stw2069``
+`☞ <https://doi.org/10.1093/mnras/stw2069>`__
 
 The following BibTeX entry could be useful in a LaTeX document:
 

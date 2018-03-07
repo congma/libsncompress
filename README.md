@@ -14,13 +14,14 @@ described in the paper "Application of Bayesian graphs to SN Ia data analysis
 and compression" (C.&nbsp;Ma, P.-S.&nbsp;Corasaniti, & 
 B.&nbsp;A.&nbsp;Bassett, 2016, [MNRAS, submitted][m16], "M16"; accepted 
 version: 2016 MNRAS, 463, 1651, <abbr
-title="Digital Object Identifier">DOI</abbr>: [`10.1093/mnras/stw2069`][m16a], 
-BibCode: [`2016MNRAS.463.1651M`][m16ads]).  It is designed for use with the 
-[JLA][jla] dataset, but can be easily extended for other similar datasets.
+title="Digital Object Identifier">DOI</abbr>: `10.1093/mnras/stw2069` 
+[☞][m16a], BibCode: `2016MNRAS.463.1651M` [☞][m16ads]).  It is designed for 
+use with the [JLA][jla] dataset, but can be easily extended for other similar 
+datasets.
 
-It also includes a Python executable script, 
-[`jlacompress`][local-scripts-jlacompress], that serves as an example 
-command-line user interface.
+It also includes a Python executable script, `jlacompress` 
+[☞][local-scripts-jlacompress], that serves as an example command-line user 
+interface.
 
 The programs work with both Python 2.7 and 3.6.
 
@@ -138,13 +139,13 @@ page for details about the data files.
 
 The following *two* files must be downloaded:
 
-1.  The file [`jla_likelihood_v6.tgz`][jlatarball], compressed archive 
+1.  The file `jla_likelihood_v6.tgz` [☞][jlatarball], compressed archive 
     containing the file `data/jla_lcparams.txt`.  This file contains the 
     supernova sample catalogue.  The other files in this archive are not 
     necessary.
 2.  The FITS files containing the components of data covariance, in the 
-    compressed archive [`covmat_v6.tgz`][jlafits].  The non-FITS files in this 
-    archive are not necessary.
+    compressed archive `covmat_v6.tgz` [☞][jlafits].  The non-FITS files in 
+    this archive are not necessary.
 
 
 ## Hacking ##
@@ -218,15 +219,15 @@ exposed API, are likely to see significant revisions in the future.
 
 ## Requirements ##
 
-*  [`six`][six] (unknown version), for Python 2 and 3 compatibility;
-*  [`numpy`][numpy] (`>= 1.6.0`), for array data structure and basic 
+*  `six` (unknown version) [☞][six], for Python 2 and 3 compatibility;
+*  `numpy` (`>= 1.6.0`) [☞][numpy], for array data structure and basic 
    operations;
-*  [`scipy`][scipy] (`>= 0.11.0`), for linear algebra and numerical 
+*  `scipy` (`>= 0.11.0`) [☞][scipy], for linear algebra and numerical 
    optimization;
-*  [`astropy`][astropy] (unknown version), for loading FITS files with the
+*  `astropy` (unknown version) [☞][astropy], for loading FITS files with the
    `astropy.io.fits` module, which replaces the dependence on
-   [`pyfits`][pyfits] in earlier versions;
-*  [`cachetools`][ct] (unknown version), for caching partial evaluation 
+   `pyfits` [☞][pyfits] in earlier versions;
+*  `cachetools` (unknown version) [☞][ct], for caching partial evaluation 
    results, which is essential for compression speed.
 
 
@@ -245,7 +246,7 @@ Performance is mostly determined by the following two conditions:
     they are suitably chosen, the number of iterations required to achieve 
     convergence is reduced.
 
-The script [`jlacompress`][local-scripts-jlacompress] attempts to 
+The script `jlacompress` [☞][local-scripts-jlacompress] attempts to 
 automatically create acceptable initial value and scaling that is optimized 
 for the *default* compression used in the [JLA paper][jla].  The automatic 
 initial value and scaling are not optimized for any other usage cases.
@@ -262,7 +263,7 @@ If you use this program in your research, we would like to suggest you cite
 the following paper ("M16"):
 
 Ma, C., Corasaniti, P.-S., & Bassett, B.&nbsp;A. 2016, MNRAS, 463, 1651,
-[`doi: 10.1093/mnras/stw2069`][m16a]
+`doi: 10.1093/mnras/stw2069` [☞][m16a]
 
 The following BibTeX entry could be useful in a LaTeX document:
 
