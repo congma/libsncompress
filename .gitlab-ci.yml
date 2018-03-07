@@ -4,6 +4,10 @@ before_script:
   - |
     apt-get update -qq && apt-get install -y -qq \
                                           python python3 \
+                                          pandoc \
+                                          python-pypandoc python3-pypandoc \
+                                          python-setuptools \
+                                          python3-setuptools \
                                           python-pip python3-pip \
                                           python-numpy python3-numpy \
                                           python-scipy python3-scipy \
