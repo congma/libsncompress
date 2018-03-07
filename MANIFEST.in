@@ -1,3 +1,5 @@
 include README.md
 include README.rst
 include COPYING
+prune testdata
+global-exclude  *cov.txt *mean.txt *redshift.txt

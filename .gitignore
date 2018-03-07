@@ -3,6 +3,9 @@
 *.fit
 *.fz
 
+# Test data
+testdata/
+
 # Arbitrary archive data files
 *.gz
 *.tar

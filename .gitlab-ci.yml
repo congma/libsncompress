@@ -1,5 +1,8 @@
 image: "registry.gitlab.com/congma/libsncompress/with-realdata:latest"
 
+variables:
+  LSNZ_GITLAB_CI_TESTDATA_BASE: "/realdata/jlafiles"
+
 before_script:
   - |
     apt-get update -qq && apt-get install -y -qq \
@@ -22,5 +25,8 @@ job_smoketests:
   stage: smoketests
   script:
     - tox -c gitlab.com-ci-smoketests-tox.ini
+  cache:
+    paths:
+     - .tox/
   tags:
     - shared
