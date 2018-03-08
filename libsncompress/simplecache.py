@@ -129,10 +129,26 @@ class NumKeyLite(object):
         return self.__h
 
     def __eq__(self, other):
-        """Test whether the underlying data is bytewise-equal."""
+        """Test whether the underlying data is bytewise-equal.
+        >>> a = numpy.arange(16); b = a.copy()
+        >>> ak = NumKeyLite(a); bk = NumKeyLite(b)
+        >>> ak == bk
+        True
+        >>> bk = NumKeyLite(b + 0.1)
+        >>> ak == bk
+        False
+        >>> b = a.reshape(4, -1).copy(); bk = NumKeyLite(b)
+        >>> ak == bk
+        False
+        """
         # NOTE: This is debatable.
+        # NOTE: Hopefully, the hash function should behave so well that
+        # collisions are rare, therefore making it rare that the expensive
+        # equality comparison is called.
         try:
-            return self.__value.tobytes() == other.__value.tobytes()
+            return all(numpy.equal(self.__value, other.__value))
+        except ValueError:
+            return False
         except AttributeError:
             raise TypeError("Not knowing how to compare.")
 
@@ -146,8 +162,9 @@ class NumKeyLite(object):
         return "NumKeyLite(%r)" % self.__value
 
     def __del__(self):
-        # When we yield the reference for destruction, restore old writeable
-        # flag.  This may have nasty effects.
+        # When we (i.e. the NumKeyLite instance, not the value it holds) are
+        # destroyed, restore old writeable flag to the referenced array.  This
+        # may have nasty effects.
         self.__value.flags.writeable = self.__oldw
 
 
