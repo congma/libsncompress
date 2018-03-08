@@ -4,7 +4,8 @@
 *.fz
 
 # Test data
-testdata/
+testdata/*
+!testdata/m16
 
 # Arbitrary archive data files
 *.gz
