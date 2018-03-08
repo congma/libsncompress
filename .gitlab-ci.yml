@@ -1,7 +1,7 @@
 image: "registry.gitlab.com/congma/libsncompress/with-realdata:latest"
 
 variables:
-  LSNZ_GITLAB_CI_TESTDATA_BASE: "/realdata/jlafiles"
+  LSNZ_GITLAB_CI_TESTDATA_BASE: "/realdata/testdata"
 
 before_script:
   - |
@@ -19,10 +19,10 @@ before_script:
                                           tox
 
 stages:
-  - smoketests
+  - test
 
-job_smoketests:
-  stage: smoketests
+job_test:
+  stage: test
   script:
     - tox
   cache:
