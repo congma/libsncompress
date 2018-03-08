@@ -252,12 +252,12 @@ Reproducibility Tests
 ~~~~~~~~~~~~~~~~~~~~~
 
 One important goal of the test suits in this repository is to ensure
-that the results of JLA SNIa compression is always reproducible.
+that the results of JLA SNIa compression are always reproducible.
 
 First, as we have shown in `M16 <http://arxiv.org/abs/1603.08519>`__,
 the `JLA <http://arxiv.org/abs/1401.4064>`__ compression results (their
-Tables F.1 and F.2), especially the covariance matrix, is "very close"
-to the one obtained using this program on the `JLA data
+Tables F.1 and F.2), especially the covariance matrix, are "very close"
+to the ones obtained using this program on the `JLA data
 release <http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html>`__, but
 with the (highly discouraged) ``withlogdet=False`` option enabled for
 ``libsncompress.CovEvaluator``.
