@@ -3,8 +3,8 @@
 Summary
 -------
 
-``libsncompress`` -- a Python utility for compressing supernova
-cosmological data.
+``libsncompress`` -- efficient and reproducible Python utility for
+compressing supernova cosmological data.
 
 Description
 -----------
@@ -247,6 +247,27 @@ the sawtooth-basis compression, which is compatible with the original
 `JLA one <http://arxiv.org/abs/1401.4064>`__. The implementation
 details, as well as the exposed API, are likely to see significant
 revisions in the future.
+
+Reproducibility Tests
+~~~~~~~~~~~~~~~~~~~~~
+
+One important goal of the test suits in this repository is to ensure
+that the results of JLA SNIa compression is always reproducible.
+
+First, as we have shown in `M16 <http://arxiv.org/abs/1603.08519>`__,
+the `JLA <http://arxiv.org/abs/1401.4064>`__ compression results (their
+Tables F.1 and F.2), especially the covariance matrix, is "very close"
+to the one obtained using this program on the `JLA data
+release <http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html>`__, but
+with the (highly discouraged) ``withlogdet=False`` option enabled for
+``libsncompress.CovEvaluator``.
+
+Second, the compression results produced by this program on the released
+JLA data must match those presented in
+`M16 <http://arxiv.org/abs/1603.08519>`__, Tables A1 and A2.
+
+The reproducibility tests check that these constraints are satisfied by
+all revisions to the codebase.
 
 Requirements
 ------------
