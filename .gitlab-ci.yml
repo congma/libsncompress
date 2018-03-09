@@ -18,6 +18,7 @@ before_script:
                                           python-pytest python3-pytest \
                                           python-pytest-cov python3-pytest-cov \
                                           tox
+  - pip install --upgrade tox
 
 stages:
   - test
