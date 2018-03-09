@@ -16,6 +16,7 @@ before_script:
                                           python-scipy python3-scipy \
                                           python-astropy python3-astropy \
                                           python-pytest python3-pytest \
+                                          python-pytest-cov python3-pytest-cov \
                                           tox
 
 stages:
