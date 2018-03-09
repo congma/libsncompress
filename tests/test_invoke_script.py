@@ -1,6 +1,6 @@
 """Testing invocation of the script ``jlacompress``."""
 import subprocess
-from lsnz_test_infra import jla_full_paths
+from lsnz_test_infra import jla_full_paths, outdir
 
 
 def test_run_script_help():
@@ -9,9 +9,9 @@ def test_run_script_help():
     assert status == 0
 
 
-def test_run_script(jla_full_paths):
+def test_run_script(jla_full_paths, outdir):
     dpath, fpath = jla_full_paths
     cmd = ["jlacompress", "-d", dpath, "-t", fpath,
-           "-v", "-p", "test_run_script-"]
+           "-v", "-p", "%s/test_run_script-" % outdir]
     status = subprocess.call(cmd)
     assert status == 0

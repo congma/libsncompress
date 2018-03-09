@@ -109,3 +109,9 @@ def jla_full_paths():
     fits_cov_path, = search_for(data_basedir(), "covmat", fordirs=True)
     table_path, = search_for(data_basedir(), "jla_lcparams.txt")
     return fits_cov_path, table_path
+
+
+@pytest.fixture(scope="session")
+def outdir(tmpdir_factory):
+    out_dir = tmpdir_factory.mktemp("lsnz_test_output")
+    return out_dir
