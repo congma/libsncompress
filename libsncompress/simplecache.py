@@ -248,8 +248,3 @@ class ArrayMethodCacheMixin(object):
         """Create the container for the method caches in this instance (self).
         """
         self._cachedict = {}
-
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()

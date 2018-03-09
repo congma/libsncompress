@@ -227,8 +227,3 @@ def pairwise(iterable):
 def areoverlapping(left, right):
     """Test if the chains represented by left and right are overlapping."""
     return right[0] <= left[-1]
-
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
