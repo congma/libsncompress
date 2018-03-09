@@ -69,7 +69,7 @@ def data_basedir(envkey="LSNZ_TESTDATA_BASE"):
         # Environment not properly set.
         warnings.warn("Test data base-directory not set "
                       "by environment variable '%s'" % envkey,
-                      warnings.ResourceWarning)
+                      RuntimeWarning)
         # Try to assume we're in the repo directory and guess basedir
         basedir = "testdata"
     return basedir
