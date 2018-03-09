@@ -134,12 +134,20 @@ class NumKeyLite(object):
         >>> ak = NumKeyLite(a); bk = NumKeyLite(b)
         >>> ak == bk
         True
+        >>> ak != bk
+        False
         >>> bk = NumKeyLite(b + 0.1)
         >>> ak == bk
         False
         >>> b = a.reshape(4, -1).copy(); bk = NumKeyLite(b)
         >>> ak == bk
         False
+        >>> ak != bk
+        True
+        >>> ak == a  # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+            ...
+        TypeError: Not knowing how to compare.
         """
         # NOTE: This is debatable.
         # NOTE: Hopefully, the hash function should behave so well that
