@@ -47,6 +47,10 @@ class BinCollection(object):
     (2, 1)
     >>> c.binaddress(5)
     (2, 2)
+    >>> c.binaddress(2.5)  # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid index value: ...
 
     To get a bin by its index, use getbin()
     >>> c.getbin(0)
@@ -190,7 +194,7 @@ class BinCollection(object):
         """Return normalized bin index.
         """
         if index != int(index):
-            raise ValueError("Invalid index value: %s" % index)
+            raise ValueError("Invalid index value: %r" % index)
         if index >= self.nbins or index <= -1 - self.nbins:
             raise IndexError("Index out of range.")
         if index < 0:
