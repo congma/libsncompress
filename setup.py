@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 import os
+import os.path
 import errno
 from setuptools import setup
 import six
@@ -67,8 +68,8 @@ setup(name=pname, version="0.0.3",
       author="Cong Ma",
       author_email="cong.ma@obspm.fr",
       url="https://gitlab.com/congma/libsncompress/",
-      packages=[pname],
-      scripts=["scripts/jlacompress"],
+      packages=[os.path.join("src", pname)],
+      scripts=[os.path.join("scripts", "jlacompress")],
       install_requires=["six", "numpy >= 1.6.0", "scipy >= 0.11.0", "astropy",
                         "cachetools"],
       setup_requires=["six", "pypandoc"],
