@@ -72,6 +72,13 @@ def traceofdot(a, b):
     return numpy.einsum("ij, ji", a, b)
 
 
+def hesstocov(matrix):
+    """Convert Hessian matrix to covariance matrix estimate."""
+    hessfac = scipy.linalg.cho_factor(matrix, check_finite=False)
+    covh = lmultiply_inv(hessfac, numpy.eye(matrix.shape[0]))
+    return covh + covh.T
+
+
 class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
     """Likelihood evaluation for the binned supernovae.
     We follow the convention that the residual vector is data minus
@@ -82,6 +89,7 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
         base:  BinnedSN instance
         withlogdet:  boolean, whether the correct conditional probability is
                      used
+        res:  evaluator output; initialized to None
     """
     def __init__(self, basesn, withlogdet=True, *args, **kwargs):
         """Set-up internal storage of covariance evaluator.
@@ -92,6 +100,7 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
             *args, **kwargs will be passed to the superclass initializer
         """
         super(CovEvaluator, self).__init__(*args, **kwargs)
+        self.res = None
         self.dimension = 3 + basesn.bins.ncontrolpoints  # n of parameters
         self.base = basesn
         self.withlogdet = withlogdet
@@ -308,6 +317,9 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
         scaled back using scaling inputs.  If not given, defaults to no
         scaling.  When properly chosen, scaling as a form of conditioning may
         improve convergence speed.
+
+        Returns the scipy.optimize.OptimizeResult object and set it to the
+        `res` attribute of self instance.
         """
         if x0 is None:
             x0 = _initial_guess(self.base)
@@ -345,14 +357,23 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
         res = scipy.optimize.minimize(funwrap, init,
                                       jac=gradwrap, hess=hesswrap,
                                       *otherargs, **kwargs)
-        res["x"] *= local_scalings
-        res["fun"] /= fscaling
+        res.x *= local_scalings
+        res.fun /= fscaling
         try:
-            res["jac"] /= fs_local
-        except KeyError:
+            res.jac /= fs_local
+        except AttributeError:
             pass
         try:
-            res["hess"] /= fs_outer
-        except KeyError:
+            res.hess /= fs_outer
+        except AttributeError:
             pass
+        self.res = res
         return res
+
+    def compressed_cov(self):
+        """Returns the covariance estimate from self.minimize() run."""
+        if self.res is None or not self.res.success:
+            raise ValueError("Minimization result unusable.")
+        # Do not retrieve hess from res; not all minimizers support it.
+        # chisqhess method should be fast enough due to caching.
+        return hesstocov(self.chisqhess(self.res.x))

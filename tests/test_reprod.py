@@ -131,10 +131,7 @@ def test_reprod_jla(jla_target, jla_full_paths):
     sinned_ev = libsncompress.CovEvaluator(binned_sn, withlogdet=False)
     minres = sinned_ev.minimize(method="trust-ncg", options={})
     assert minres.success   # Must converge
-    hess = sinned_ev.chisqhess(minres.x)
-    hessfac = cho_factor(hess, check_finite=False)
-    cov = lmultiply_inv(hessfac, numpy.eye(sinned_ev.dimension))
-    cov = cov + cov.T
+    cov = sinned_ev.compressed_cov()
     our_v = minres.x[3:]
     our_cov = cov[3:, 3:]
     kld = kldgaussian(their_v, their_cov, our_v, our_cov)
@@ -152,10 +149,7 @@ def test_reprod_m16(m16_target, jla_full_paths):
     ev = libsncompress.CovEvaluator(binned_sn)
     minres = ev.minimize(method="trust-ncg", options={})
     assert minres.success
-    hess = ev.chisqhess(minres.x)
-    hessfac = cho_factor(hess, check_finite=False)
-    cov = lmultiply_inv(hessfac, numpy.eye(ev.dimension))
-    cov = cov + cov.T
+    cov = ev.compressed_cov()
     # Check in the truncated parameter space of only distances, without
     # the corresponding standardization parameters (the first 3 ones).
     # Reason: in M16 the exact values are only available for the compressed

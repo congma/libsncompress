@@ -62,18 +62,15 @@ ce = evaluator.CovEvaluator(n, withlogdet=(not optns.no_logdet))
 res = ce.minimize(method="trust-ncg", options={})
 if optns.verbose:
     _info(res)
-if not res["success"]:
+if not res.success:
     _info("error: failed to find optimal parameters")
-    _info("the message was: %s" % res["message"])
+    _info("the message was: %s" % res.message)
     sys.exit(1)
 else:
     if optns.verbose:
         _info("info: success")
 
-hess = ce.chisqhess(res["x"])
-hessfac = scipy.linalg.cho_factor(hess, check_finite=False)
-cov = evaluator.lmultiply_inv(hessfac, numpy.eye(ce.dimension))
-cov = cov + cov.T
+cov = ce.compressed_cov()
 
 suffix = "-no-logdet" if optns.no_logdet else ""
 ffmt = "% .12e"
