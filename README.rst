@@ -1,4 +1,4 @@
-|pipeline status| |license| |Python versions|
+|pipeline status| |coverage report| |license| |Python versions|
 
 Summary
 -------
@@ -350,6 +350,8 @@ The following BibTeX entry could be useful in a LaTeX document:
    -->
 
 .. |pipeline status| image:: https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg
+   :target: https://gitlab.com/congma/libsncompress/commits/master
+.. |coverage report| image:: https://gitlab.com/congma/libsncompress/badges/master/coverage.svg
    :target: https://gitlab.com/congma/libsncompress/commits/master
 .. |license| image:: https://img.shields.io/badge/license-BSD-yellow.svg
    :target: https://gitlab.com/congma/libsncompress/blob/master/COPYING
