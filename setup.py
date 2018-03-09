@@ -3,7 +3,7 @@ import sys
 import os
 import os.path
 import errno
-from setuptools import setup
+from setuptools import setup, find_packages
 import six
 
 
@@ -68,12 +68,14 @@ setup(name=pname, version="0.0.3",
       author="Cong Ma",
       author_email="cong.ma@obspm.fr",
       url="https://gitlab.com/congma/libsncompress/",
-      packages=[os.path.join("src", pname)],
+      packages=find_packages("src"),
+      package_dir={"": "src"},
       scripts=[os.path.join("scripts", "jlacompress")],
       install_requires=["six", "numpy >= 1.6.0", "scipy >= 0.11.0", "astropy",
                         "cachetools"],
       setup_requires=["six", "pypandoc"],
-      tests_require=["pytest >= 3.2.0", "pytest-cov", "tox"],
+      tests_require=["coverage >= 4.2", "pytest >= 3.2.0", "pytest-cov",
+                     "tox"],
       provides=[pname],
       license="BSD",
       classifiers=["Development Status :: 4 - Beta",
