@@ -43,6 +43,11 @@ that decorate your methods.  For example:
 ...     def spam(self, array, blah=5.0):
 ...         f = self.frob(array)
 ...         return numpy.dot(f, f + blah * self.v)
+... 
+...     @memoized(cachetype=None)
+...     def eggs(self, array):
+...         '''A special case for no-caching, for debug only.'''
+...         return array * 2.0
 
 After that, you can interactively test the effect of memoization by
 instantiating A:
@@ -80,6 +85,8 @@ After the first call to ta.spam(), it will have its own cache, too:
 Docstring of the decorated method is preserved as-is:
 >>> print(ta.frob.__doc__)
 Docstring for method frob is preserved.
+>>> print (ta.eggs.__doc__)
+A special case for no-caching, for debug only.
 
 Author: Cong Ma <cong.ma@obspm.fr>, (c) 2015.  See the file COPYING.
 """
@@ -107,14 +114,29 @@ class NumKeyLite(object):
         copy the input argument.  See its docs for more.
 
         Extra positional and keyword arguments are passed to numpy.asarray().
+        >>> numpy.set_printoptions(precision=1, floatmode="fixed")
+        >>> a = [0, 1, 2]; ak = NumKeyLite(a, dtype=numpy.float64)
+        >>> print(str(ak))  # doctest: +NORMALIZE_WHITESPACE
+        [0.0 1.0 2.0]
 
-        Side effect:  The underlying array is always set to read-only.  When
-        calling __init__(), if the "array" argument is not copied as a result
-        of numpy.asarray(array) call, this array will be set to read-only by
-        alias.  This is done to prevent data corruption.  User should fully
-        understand the implication of using an ndarray as key, and should not
-        attempt to manually set the array to writeable in this case.
-        Especially not during the creation of NumKeyLite objects!
+        Side effect:  The underlying array is always set to read-only during
+        the lifetime of the key instance.  When calling __init__(), if the
+        "array" argument is not copied as a result of numpy.asarray(array)
+        call, this array will be set to read-only by alias.  This is done to
+        prevent data corruption.  User should fully understand the implication
+        of using an ndarray as key, and should not attempt to manually set the
+        array to writeable in this case.  Especially not during the creation of
+        NumKeyLite objects!
+        >>> from numpy.random import rand
+        >>> a = rand(16); ak = NumKeyLite(a)
+        >>> a[0] = 2.0
+        Traceback (most recent call last):
+            ...
+        ValueError: assignment destination is read-only
+
+        The writeable flag is restored after the key releases the reference:
+        >>> del ak
+        >>> a[0] = 2.0
         """
         self.hashfcn = hashfcn
         self.__value = numpy.asarray(array, *nparray_args, **nparray_kwargs)
