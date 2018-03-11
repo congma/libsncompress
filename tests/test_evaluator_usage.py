@@ -20,8 +20,8 @@ def ref_ev(binned_sn):
 
 
 def isveryclose_p(ref, alt, tol=0.0001, check_positive=False):
-    kld = kldgaussian(ref.res.x, ref.compressed_cov(),
-                      alt.res.x, alt.compressed_cov())
+    kld = kldgaussian(ref.res.x, ref.compressed_cov,
+                      alt.res.x, alt.compressed_cov)
     return (kld <= tol) and (kld >= 0.0 if check_positive else True)
 
 

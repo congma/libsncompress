@@ -70,14 +70,12 @@ else:
     if optns.verbose:
         _info("info: success")
 
-cov = ce.compressed_cov()
-
 suffix = "-no-logdet" if optns.no_logdet else ""
 ffmt = "% .12e"
 covpath = "%s%s%s.txt" % (optns.output_prefix, "cov", suffix)
 meanpath = "%s%s%s.txt" % (optns.output_prefix, "mean", suffix)
 zpath = "%s%s%s.txt" % (optns.output_prefix, "redshift", suffix)
-numpy.savetxt(covpath, cov, fmt=ffmt)
+numpy.savetxt(covpath, ce.compressed_cov, fmt=ffmt)
 numpy.savetxt(meanpath, res["x"], fmt=ffmt)
 numpy.savetxt(zpath,
               numpy.power(10, numpy.fromiter(n.bins.itercontrolpoints(),
