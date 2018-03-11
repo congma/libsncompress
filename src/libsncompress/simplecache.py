@@ -170,13 +170,18 @@ class NumKeyLite(object):
         Traceback (most recent call last):
             ...
         TypeError: Not knowing how to compare.
+        >>> ak = NumKeyLite(numpy.array(1.0))
+        >>> bk = NumKeyLite(numpy.array(1.0))
+        >>> ak == bk
+        True
         """
         # NOTE: This is debatable.
         # NOTE: Hopefully, the hash function should behave so well that
         # collisions are rare, therefore making it rare that the expensive
         # equality comparison is called.
         try:
-            return all(numpy.equal(self.__value, other.__value))
+            # numpy.all() works on zero-dimensional arrays.
+            return numpy.all(numpy.equal(self.__value, other.__value))
         except ValueError:
             return False
         except AttributeError:
