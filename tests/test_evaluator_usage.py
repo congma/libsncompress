@@ -25,6 +25,17 @@ def isveryclose_p(ref, alt, tol=0.0001, check_positive=False):
     return (kld <= tol) and (kld >= 0.0 if check_positive else True)
 
 
+def test_evaluator_compressed_ev(ref_ev):
+    assert ref_ev.res.compressed_cov is ref_ev.compressed_cov
+
+
+def test_unready_evaluator(binned_sn):
+    ev = libsncompress.CovEvaluator(binned_sn)
+    assert ev.res is None
+    with pytest.raises(ValueError):
+        a = ev.compressed_cov
+
+
 def test_min_method_newton_cg(binned_sn, ref_ev):
     ev = libsncompress.CovEvaluator(binned_sn)
     ev.minimize(method="Newton-CG", options=dict(xtol=1e-7))
