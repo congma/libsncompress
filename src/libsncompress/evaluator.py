@@ -332,7 +332,10 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
         ``trust-ncg`` by default.
 
         Returns the scipy.optimize.OptimizeResult object and set it to the
-        ``res`` attribute of self instance.
+        ``res`` attribute of self instance.  The OptimizeResult object has an
+        additional attribute, ``compressed_cov``, obtained by casting the
+        Hessian at optimal point as an estimate of the covariance matrix of
+        compressed results.
         """
         newkw = dict(kwargs, method=kwargs.get("method", "trust-ncg"))
         if x0 is None:
@@ -381,13 +384,17 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
             res.hess /= fs_outer
         except AttributeError:
             pass
+        # Do not retrieve hess from res; as noted above, not all minimizers
+        # support it.  chisqhess method should be fast enough due to caching.
+        res.compressed_cov = hesstocov(self.chisqhess(res.x))
         self.res = res
         return res
 
+    @property
     def compressed_cov(self):
-        """Returns the covariance estimate from self.minimize() run."""
+        """Convenient property to access the covariance estimate from
+        self.minimize() run, if it is available.
+        """
         if self.res is None or not self.res.success:
             raise ValueError("Minimization result unusable.")
-        # Do not retrieve hess from res; not all minimizers support it.
-        # chisqhess method should be fast enough due to caching.
-        return hesstocov(self.chisqhess(self.res.x))
+        return self.res.compressed_cov
