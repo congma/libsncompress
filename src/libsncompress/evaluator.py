@@ -313,14 +313,28 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
 
     def minimize(self, x0=None, jac=None, hess=None,
                  xscalings=None, fscaling=1.0, *otherargs, **kwargs):
-        """Wrapper around self.optimize.minimize, with scaling.  Output is
-        scaled back using scaling inputs.  If not given, defaults to no
-        scaling.  When properly chosen, scaling as a form of conditioning may
-        improve convergence speed.
+        """Wrapper around scipy.optimize.minimize, with scaling.
+
+        Output is scaled back using scaling inputs.  If not given, use
+        guesstimates. When properly chosen, scaling as a form of conditioning
+        may improve convergence speed.
+
+        ``x0`` is the initial guess, and if not given, or is None, defaults to
+        a guesstimate.
+
+        ``jac`` and ``hess`` are functions that evaluates the Jacobian and
+        Hessian respectively.  If not given or are None, use the default ones
+        supplied by self.
+
+        Other positional arguments ``otherargs`` are passed to
+        scipy.optimize.minimize.  Other keyword arguments ``kwargs`` are also
+        passed through, but if the ``method`` keyword is absent, use
+        ``trust-ncg`` by default.
 
         Returns the scipy.optimize.OptimizeResult object and set it to the
-        `res` attribute of self instance.
+        ``res`` attribute of self instance.
         """
+        newkw = dict(kwargs, method=kwargs.get("method", "trust-ncg"))
         if x0 is None:
             x0 = _initial_guess(self.base)
         if xscalings is None:
@@ -356,7 +370,7 @@ class CovEvaluator(simplecache.ArrayMethodCacheMixin, object):
 
         res = scipy.optimize.minimize(funwrap, init,
                                       jac=gradwrap, hess=hesswrap,
-                                      *otherargs, **kwargs)
+                                      *otherargs, **newkw)
         res.x *= local_scalings
         res.fun /= fscaling
         try:

@@ -14,7 +14,7 @@ def binned_sn(jla_full_paths):
 @pytest.fixture(scope="module")
 def ref_ev(binned_sn):
     ref = libsncompress.CovEvaluator(binned_sn)
-    ref.minimize(method="trust-ncg")
+    ref.minimize()
     assert ref.res.success
     return ref
 
@@ -53,7 +53,7 @@ def test_min_alter_x0(binned_sn, ref_ev):
     ev = libsncompress.CovEvaluator(binned_sn)
     x0 = numpy.zeros(3 + binned_sn.bins.ncontrolpoints)
     x0[3:] = 10.0
-    ev.minimize(method="trust-ncg", x0=x0)
+    ev.minimize(x0=x0)
     assert ev.res.success
     assert isveryclose_p(ref_ev, ev)
 
@@ -61,6 +61,6 @@ def test_min_alter_x0(binned_sn, ref_ev):
 def test_min_alter_scalings(binned_sn, ref_ev):
     ev = libsncompress.CovEvaluator(binned_sn)
     xs = numpy.ones(3 + binned_sn.bins.ncontrolpoints)
-    ev.minimize(method="trust-ncg", xscalings=xs)
+    ev.minimize(xscalings=xs)
     assert ev.res.success
     assert isveryclose_p(ref_ev, ev)

@@ -230,8 +230,10 @@ The ``CovEvaluator`` instance, ``ev``, provides a method ``minimize``,
 which is a wrapper of ``scipy.optimize.minimize``. Additional positional
 and keyword arguments are passed over to that function. The recommended
 optimization algorithm is ``trust-ncg`` which fully utilizes the Hessian
-matrix. This can be enabled by passing ``method="trust-ncg"`` as an
-optional keyword parameter.
+matrix. This is the default minimization algorithm if left unspecified,
+and other algorithms supported by
+`☞ <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html>`__\ ``scipy.optimize.minimize``
+can be passed as the optional keyword parameter ``method``.
 
 The return value of ``CovEvaluator.minimize`` method is simply that of
 the underlying ``scipy`` function, but with results suitably scaled.
