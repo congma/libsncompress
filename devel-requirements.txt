@@ -6,5 +6,4 @@ astropy
 cachetools
 coverage>=4.2
 pytest>=3.2.0
-pytest-cov
 pypandoc

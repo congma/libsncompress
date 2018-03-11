@@ -5,7 +5,7 @@ variables:
 
 before_script:
   - |
-    apt-get update -qq && apt-get install -y -qq \
+    apt-get update -qq -y && apt-get install -y -qq \
                                           python python3 \
                                           pandoc \
                                           python-pypandoc python3-pypandoc \
@@ -16,9 +16,9 @@ before_script:
                                           python-scipy python3-scipy \
                                           python-astropy python3-astropy \
                                           python-pytest python3-pytest \
-                                          python-pytest-cov python3-pytest-cov \
+                                          python-coverage python3-coverage \
                                           tox
-  - pip install --upgrade tox
+  - pip install --upgrade --no-cache-dir tox
 
 stages:
   - test
