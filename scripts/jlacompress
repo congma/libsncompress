@@ -59,7 +59,7 @@ nnuis = 3
 npars = nnuis + n.bins.ncontrolpoints
 
 ce = evaluator.CovEvaluator(n, withlogdet=(not optns.no_logdet))
-res = ce.minimize(method="trust-ncg", options={})
+res = ce.minimize()
 if optns.verbose:
     _info(res)
 if not res.success:

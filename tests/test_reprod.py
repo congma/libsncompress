@@ -21,7 +21,7 @@ def test_reprod_jla(jla_target, jla_full_paths):
     # and this is the default.
     binned_sn = libsncompress.BinnedSN(fitsdir, tablepath)
     sinned_ev = libsncompress.CovEvaluator(binned_sn, withlogdet=False)
-    minres = sinned_ev.minimize(method="trust-ncg", options={})
+    minres = sinned_ev.minimize()
     assert minres.success   # Must converge
     cov = sinned_ev.compressed_cov()
     our_v = minres.x[3:]
@@ -39,7 +39,7 @@ def test_reprod_m16(m16_target, jla_full_paths):
     binned_sn = libsncompress.BinnedSN(fitsdir, tablepath,
                                        [numpy.log10(their_z)])
     ev = libsncompress.CovEvaluator(binned_sn)
-    minres = ev.minimize(method="trust-ncg", options={})
+    minres = ev.minimize()
     assert minres.success
     cov = ev.compressed_cov()
     # Check in the truncated parameter space of only distances, without
