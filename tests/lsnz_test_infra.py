@@ -7,6 +7,7 @@ import pytest
 import six
 import numpy
 from scipy.linalg import cho_factor
+import libsncompress
 from libsncompress.evaluator import (lmultiply_inv,
                                      quadratic_inv,
                                      logdet_cholesky)
@@ -115,3 +116,25 @@ def jla_full_paths():
 def outdir(tmpdir_factory):
     out_dir = tmpdir_factory.mktemp("lsnz_test_output")
     return out_dir
+
+
+@pytest.fixture(scope="session")
+def ref_binned_sn(jla_full_paths):
+    binned_sn = libsncompress.BinnedSN(*jla_full_paths)
+    return binned_sn
+
+
+@pytest.fixture(scope="session")
+def ref_ev(ref_binned_sn):
+    ev = libsncompress.CovEvaluator(ref_binned_sn)
+    ev.minimize()
+    assert ev.res.success
+    return ev
+
+
+@pytest.fixture(scope="session")
+def ref_ev_nologdet(ref_binned_sn):
+    ev = libsncompress.CovEvaluator(ref_binned_sn, withlogdet=False)
+    ev.minimize()
+    assert ev.res.success
+    return ev

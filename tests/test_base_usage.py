@@ -27,6 +27,7 @@ def test_invalid_fits_dir(outdir, jla_full_paths):
 
 
 def test_extra_file_in_fits_dir(extra_file, jla_full_paths):
+    os.stat(extra_file)
     base = libsncompress.BinnedSN(*jla_full_paths)
 
 
