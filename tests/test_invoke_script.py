@@ -1,6 +1,14 @@
 """Testing invocation of the script ``jlacompress``."""
 import subprocess
-from lsnz_test_infra import jla_full_paths, outdir
+import pytest
+from lsnz_test_infra import jla_full_paths, outdir, ref_ev, ref_ev_nologdet
+
+
+@pytest.fixture(scope="module")
+def basic_cmd(jla_full_paths, outdir):
+    dpath, fpath = jla_full_paths
+    return ["jlacompress", "-d", dpath, "-t", fpath, "-v", "-p",
+            "%s/test_invoke_script-" % outdir]
 
 
 def test_run_script_help():
@@ -9,9 +17,11 @@ def test_run_script_help():
     assert status == 0
 
 
-def test_run_script(jla_full_paths, outdir):
-    dpath, fpath = jla_full_paths
-    cmd = ["jlacompress", "-d", dpath, "-t", fpath,
-           "-v", "-p", "%s/test_run_script-" % outdir]
-    status = subprocess.call(cmd)
+def test_run_script(basic_cmd):
+    status = subprocess.call(basic_cmd)
+    assert status == 0
+
+
+def test_run_script_nologdet(basic_cmd):
+    status = subprocess.call(basic_cmd + ["-n"])
     assert status == 0

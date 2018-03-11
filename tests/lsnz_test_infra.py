@@ -115,7 +115,8 @@ def jla_full_paths():
 @pytest.fixture(scope="session")
 def outdir(tmpdir_factory):
     out_dir = tmpdir_factory.mktemp("lsnz_test_output")
-    return out_dir
+    yield out_dir
+    out_dir.remove(rec=True)
 
 
 @pytest.fixture(scope="session")
