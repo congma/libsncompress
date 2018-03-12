@@ -169,7 +169,7 @@ output_files_in_basedir | grep 'covmat/C_.*\.fits' | \
 # Extract the text data files.  Also by filtering (and replacing).
 output_files_in_basedir | grep 'jla_.*' | \
     sed -e 's#^#jla_likelihood_v6/data/#g' | \
-    xargs tar --strip-components=2 -kzxf jla_likelihood_v6.tgz
+    xargs tar --strip-components=2 -zxf jla_likelihood_v6.tgz
 # Make extracted files read-only.
 output_files_in_basedir | xargs chmod -w
 
