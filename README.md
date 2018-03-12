@@ -153,6 +153,17 @@ The following *two* files must be downloaded:
    compressed archive [☞][jlafits]`covmat_v6.tgz`.  The non-FITS files in this 
    archive are not necessary.
 
+The `git` source repository includes a shell script to download and extract 
+these files: [☞][downloadscript]`download_jla.sh`.  This script is meant to be 
+run manually.  Simply invoking the script in the repository directory
+```bash
+./download_jla.sh
+```
+will suffice -- this will populate the `testdata` directory with the necessary 
+files and check the file integrity.
+
+After obtaining the data files, the tests can be run using `tox`.
+
 
 ## Hacking ##
 
@@ -313,6 +324,7 @@ archivePrefix = "arXiv",
 [m16a]: https://doi.org/10.1093/mnras/stw2069 "The M16 paper (accepted version, subscription required)"
 [m16ads]: http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M "The M16 paper's entry in SAO/NASA ADS"
 [local-scripts-jlacompress]: scripts/jlacompress
+[downloadscript]: download_jla.sh
 [jla]: http://arxiv.org/abs/1401.4064 "JLA reference paper"
 [jlarm]: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html "JLA project"
 [jlatarball]: http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz
