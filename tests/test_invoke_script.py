@@ -17,11 +17,7 @@ def test_run_script_help():
     assert status == 0
 
 
-def test_run_script(basic_cmd):
-    status = subprocess.call(basic_cmd)
-    assert status == 0
-
-
-def test_run_script_nologdet(basic_cmd):
-    status = subprocess.call(basic_cmd + ["-n"])
+@pytest.mark.parametrize("additional_args", [[], ["-n"]])
+def test_run_script(basic_cmd, additional_args):
+    status = subprocess.call(basic_cmd + additional_args)
     assert status == 0

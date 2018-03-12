@@ -3,4 +3,5 @@ include README.rst
 include COPYING
 prune testdata
 graft testdata/m16
-global-exclude  *cov.txt *mean.txt *redshift.txt
+global-exclude *cov.txt *mean.txt *redshift.txt
+global-exclude download_jla.sh

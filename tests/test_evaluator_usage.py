@@ -38,12 +38,12 @@ def test_min_method_bfgs(ref_binned_sn, ref_ev):
     assert isveryclose_p(ref_ev, ev)
 
 
-def test_min_method_trust_regions(ref_binned_sn, ref_ev):
-    for method in ("dogleg", "trust-exact"):
-        ev = libsncompress.CovEvaluator(ref_binned_sn)
-        ev.minimize(method=method)
-        assert ev.res.success
-        assert isveryclose_p(ref_ev, ev)
+@pytest.mark.parametrize("method", ["dogleg", "trust-exact"])
+def test_min_method_trust_regions(ref_binned_sn, ref_ev, method):
+    ev = libsncompress.CovEvaluator(ref_binned_sn)
+    ev.minimize(method=method)
+    assert ev.res.success
+    assert isveryclose_p(ref_ev, ev)
 
 
 def test_min_alter_x0(ref_binned_sn, ref_ev):

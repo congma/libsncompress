@@ -172,6 +172,20 @@ The following *two* files must be downloaded:
    `☞ <http://supernovae.in2p3.fr/sdss_snls_jla/covmat_v6.tgz>`__\ ``covmat_v6.tgz``.
    The non-FITS files in this archive are not necessary.
 
+The ``git`` source repository includes a shell script to download and
+extract these files: `☞ <download_jla.sh>`__\ ``download_jla.sh``. This
+script is meant to be run manually. Simply invoking the script in the
+repository directory
+
+.. code:: bash
+
+    ./download_jla.sh
+
+will suffice -- this will populate the ``testdata`` directory with the
+necessary files and check the file integrity.
+
+After obtaining the data files, the tests can be run using ``tox``.
+
 Hacking
 -------
 
