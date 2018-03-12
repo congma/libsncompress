@@ -32,6 +32,21 @@ _get_test_data_checksums_EOF548586433
 }
 
 
+# Newline-separated list of output file paths (relative to base dir).
+output_files_in_basedir ()
+{
+    # NOTE: "cut" field starts from 1, not 0.
+    hardcoded_sha1 | cut -d '*' -f 2-
+}
+
+
+# The invariant-check command in base dir.
+invariant_in_basedir ()
+{
+    hardcoded_sha1 | "$SHA1SUMCMD" -c -
+}
+
+
 # Clean downloaded tarballs, if asked to do so.
 clean_in_basedir ()
 {
@@ -103,8 +118,8 @@ fi
 
 
 # Invariant already satisfied.
-if { hardcoded_sha1 | "$SHA1SUMCMD" -c - > /dev/null 2>&1 ; }; then
-    >&2 echo "Warning: files already present; doing nothing"
+if { invariant_in_basedir > /dev/null 2>&1 ; }; then
+    >&2 echo "Warning: files already present; will not download data tarballs"
     clean_in_basedir
     exit 0
 fi
@@ -136,31 +151,31 @@ fi
 
 
 # Check if downloaded files are tarbombs.
-if has_sneaky_member covmat_v6.tgz; then
-    >&2 echo "Error: covmat_v6.tgz appears sneaky"
-    exit 1
-elif has_sneaky_member jla_likelihood_v6.tgz; then
-    >&2 echo "Error: jla_likelihood_v6.tgz appears sneaky"
-    exit 1
-fi
+for bn in covmat_v6.tgz jla_likelihood_v6.tgz; do
+    if has_sneaky_member "$bn"; then
+	>&2 echo "Error: $bn appears sneaky"
+	exit 1
+    fi
+done
 
 
-# Extract tarballs; extracted files will be read-only.
-tar -kzxf covmat_v6.tgz covmat/C_bias.fits covmat/C_cal.fits \
-                        covmat/C_dust.fits covmat/C_host.fits \
-                        covmat/C_model.fits covmat/C_nonia.fits \
-                        covmat/C_pecvel.fits covmat/C_stat.fits
-tar --strip-components=2 -kzxf jla_likelihood_v6.tgz \
-                               jla_likelihood_v6/data/jla_lcparams.txt \
-			       jla_likelihood_v6/data/jla_mub.txt \
-			       jla_likelihood_v6/data/jla_mub_covmatrix.dat
-chmod -w covmat/C_bias.fits covmat/C_cal.fits covmat/C_dust.fits \
-         covmat/C_host.fits covmat/C_model.fits covmat/C_nonia.fits \
-         covmat/C_pecvel.fits covmat/C_stat.fits \
-         jla_lcparams.txt jla_mub.txt jla_mub_covmatrix.dat
+# Extract tarballs
+# Extract covmat tarball, overwriting existing files.
+# (We already checked that the invariant hasn't been satisfied so far, so this
+# is OK.)
+# Get tarball members by filtering output file list already in the script.
+output_files_in_basedir | grep 'covmat/C_.*\.fits' | \
+    xargs tar -zxf covmat_v6.tgz
+# Extract the text data files.  Also by filtering (and replacing).
+output_files_in_basedir | grep 'jla_.*' | \
+    sed -e 's#^#jla_likelihood_v6/data/#g' | \
+    xargs tar --strip-components=2 -kzxf jla_likelihood_v6.tgz
+# Make extracted files read-only.
+output_files_in_basedir | xargs chmod -w
+
 
 # Check if the invariant is satisfied.
-if ! { hardcoded_sha1 | "$SHA1SUMCMD" -c - > /dev/null ; }; then
+if ! { invariant_in_basedir > /dev/null ; }; then
     >&2 echo "Error: some downloaded and extracted files do not match checksum"
     __ERR=1
 else
