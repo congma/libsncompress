@@ -28,7 +28,7 @@ job_test:
   stage: test
   script:
     - tox
-  coverage: '^TOTAL\b.+\s+([+-]?(?:\d*\.)?\d+%)\s*$'
+  coverage: '/^TOTAL\b.+\s+([+-]?(?:\d*\.)?\d+%)\s*$/'
   cache:
     key: "$CI_JOB_STAGE"
     paths:
