@@ -5,10 +5,13 @@ import libsncompress
 from lsnz_test_infra import jla_full_paths, ref_binned_sn, ref_ev, kldgaussian
 
 
-def isveryclose_p(ref, alt, tol=0.0001, check_positive=False):
+def veryclose_p(ref, alt, tol=0.0001, demand_positive=False):
     kld = kldgaussian(ref.res.x, ref.compressed_cov,
                       alt.res.x, alt.compressed_cov)
-    return (kld <= tol) and (kld >= 0.0 if check_positive else True)
+    truth = kld <= tol
+    if demand_positive:
+        return truth and kld >= 0.0
+    return truth and (numpy.allclose(kld, 0.0) if kld < 0.0 else True)
 
 
 def test_evaluator_compressed_ev(ref_ev):
@@ -26,7 +29,7 @@ def test_min_method_newton_cg(ref_binned_sn, ref_ev):
     ev = libsncompress.CovEvaluator(ref_binned_sn)
     ev.minimize(method="Newton-CG", options=dict(xtol=1e-7))
     assert ev.res.success
-    assert isveryclose_p(ref_ev, ev)
+    assert veryclose_p(ref_ev, ev)
 
 
 @pytest.mark.filterwarnings("ignore:Method bfgs does not use Hessian")
@@ -35,7 +38,7 @@ def test_min_method_bfgs(ref_binned_sn, ref_ev):
     # BFGS does not use Hessian at all, we can even pass in garbage
     ev.minimize(method="bfgs", hess=lambda x: None, options=dict(gtol=1e-6))
     assert ev.res.success
-    assert isveryclose_p(ref_ev, ev)
+    assert veryclose_p(ref_ev, ev)
 
 
 @pytest.mark.parametrize("method", ["dogleg", "trust-exact"])
@@ -43,7 +46,7 @@ def test_min_method_trust_regions(ref_binned_sn, ref_ev, method):
     ev = libsncompress.CovEvaluator(ref_binned_sn)
     ev.minimize(method=method)
     assert ev.res.success
-    assert isveryclose_p(ref_ev, ev)
+    assert veryclose_p(ref_ev, ev)
 
 
 def test_min_alter_x0(ref_binned_sn, ref_ev):
@@ -52,7 +55,7 @@ def test_min_alter_x0(ref_binned_sn, ref_ev):
     x0[3:] = 10.0
     ev.minimize(x0=x0)
     assert ev.res.success
-    assert isveryclose_p(ref_ev, ev)
+    assert veryclose_p(ref_ev, ev)
 
 
 def test_min_alter_scalings(ref_binned_sn, ref_ev):
@@ -60,4 +63,4 @@ def test_min_alter_scalings(ref_binned_sn, ref_ev):
     xs = numpy.ones(3 + ref_binned_sn.bins.ncontrolpoints)
     ev.minimize(xscalings=xs)
     assert ev.res.success
-    assert isveryclose_p(ref_ev, ev)
+    assert veryclose_p(ref_ev, ev)
