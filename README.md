@@ -320,12 +320,12 @@ archivePrefix = "arXiv",
 ```
 
 
-[m16]: http://arxiv.org/abs/1603.08519 "The M16 paper (preprint)"
+[m16]: https://arxiv.org/abs/1603.08519 "The M16 paper (preprint)"
 [m16a]: https://doi.org/10.1093/mnras/stw2069 "The M16 paper (accepted version, subscription required)"
 [m16ads]: http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M "The M16 paper's entry in SAO/NASA ADS"
 [local-scripts-jlacompress]: scripts/jlacompress
 [downloadscript]: download_jla.sh
-[jla]: http://arxiv.org/abs/1401.4064 "JLA reference paper"
+[jla]: https://arxiv.org/abs/1401.4064 "JLA reference paper"
 [jlarm]: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html "JLA project"
 [jlatarball]: http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz
 [jlafits]: http://supernovae.in2p3.fr/sdss_snls_jla/covmat_v6.tgz
@@ -333,7 +333,7 @@ archivePrefix = "arXiv",
 [numpy]: http://www.numpy.org/ "NumPy homepage"
 [scipy]: https://www.scipy.org/ "SciPy homepage"
 [spoptmin]: https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html "scipy.optimize.minimize documentation"
-[astropy]: http://www.astropy.org/ "Astropy homepage"
+[astropy]: https://www.astropy.org/ "Astropy homepage"
 [pyfits]: https://pythonhosted.org/pyfits/ "PyFITS"
 [ct]: https://pythonhosted.org/cachetools/ "cachetools"
 [issues]: https://gitlab.com/congma/libsncompress/issues "Issue tracker"

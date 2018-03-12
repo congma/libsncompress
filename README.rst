@@ -13,13 +13,13 @@ Description
   method described in the paper "Application of Bayesian graphs to SN Ia
   data analysis and compression" (C. Ma, P.-S. Corasaniti, &
   B. A. Bassett, 2016, `MNRAS,
-  submitted <http://arxiv.org/abs/1603.08519>`__, "M16"; accepted
+  submitted <https://arxiv.org/abs/1603.08519>`__, "M16"; accepted
   version: 2016 MNRAS, 463, 1651, DOI:
   `☞ <https://doi.org/10.1093/mnras/stw2069>`__\ ``10.1093/mnras/stw2069``,
   BibCode:
   `☞ <http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M>`__\ ``2016MNRAS.463.1651M``).
 | It is designed for use with the
-  `JLA <http://arxiv.org/abs/1401.4064>`__ dataset, but can be easily
+  `JLA <https://arxiv.org/abs/1401.4064>`__ dataset, but can be easily
   extended for other similar datasets.
 
 It also includes a Python executable script,
@@ -68,8 +68,8 @@ JLA Compression Script
 
 This utility comes with an executable script ``jlacompress`` that is
 tailored to the compression of the
-`JLA <http://arxiv.org/abs/1401.4064>`__ dataset, as done in our
-`M16 <http://arxiv.org/abs/1603.08519>`__ paper.
+`JLA <https://arxiv.org/abs/1401.4064>`__ dataset, as done in our
+`M16 <https://arxiv.org/abs/1603.08519>`__ paper.
 
 Synopsis
 ~~~~~~~~
@@ -94,7 +94,7 @@ Options
 -  ``-c z [z ...]``, ``--controls z [z ...]``: locations of control
    points (as redshift). At least two control points are required. If
    unspecified, use the default control points in the `JLA
-   paper <http://arxiv.org/abs/1401.4064>`__.
+   paper <https://arxiv.org/abs/1401.4064>`__.
 -  ``-n``, ``--no-logdet``: don't use the correct conditional
    probability (default: off; *warning:* use at your own risk)
 -  ``-v``, ``--verbose``: turn on verbose output (default: off)
@@ -146,7 +146,7 @@ Example Usage
 
 Assuming the data files are in their default locations, the following
 command reproduces the default compression results in the `JLA
-paper <http://arxiv.org/abs/1401.4064>`__.
+paper <https://arxiv.org/abs/1401.4064>`__.
 
 .. code:: bash
 
@@ -258,9 +258,9 @@ approximate covariance of compression parameters.
 
 Please notice that this implementation here is not a general, abstract
 implementation of the linear compression method detailed in `our
-paper <http://arxiv.org/abs/1603.08519>`__. It specifically implements
+paper <https://arxiv.org/abs/1603.08519>`__. It specifically implements
 the sawtooth-basis compression, which is compatible with the original
-`JLA one <http://arxiv.org/abs/1401.4064>`__. The implementation
+`JLA one <https://arxiv.org/abs/1401.4064>`__. The implementation
 details, as well as the exposed API, are likely to see significant
 revisions in the future.
 
@@ -270,8 +270,8 @@ Reproducibility Tests
 One important goal of the test suits in this repository is to ensure
 that the results of JLA SNIa compression are always reproducible.
 
-First, as we have shown in `M16 <http://arxiv.org/abs/1603.08519>`__,
-the `JLA <http://arxiv.org/abs/1401.4064>`__ compression results (their
+First, as we have shown in `M16 <https://arxiv.org/abs/1603.08519>`__,
+the `JLA <https://arxiv.org/abs/1401.4064>`__ compression results (their
 Tables F.1 and F.2), especially the covariance matrix, are "very close"
 to the ones obtained using this program on the `JLA data
 release <http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html>`__, but
@@ -280,7 +280,7 @@ with the (highly discouraged) ``withlogdet=False`` option enabled for
 
 Second, the compression results produced by this program on the released
 JLA data must match those presented in
-`M16 <http://arxiv.org/abs/1603.08519>`__, Tables A1 and A2.
+`M16 <https://arxiv.org/abs/1603.08519>`__, Tables A1 and A2.
 
 The reproducibility tests check that these constraints are satisfied by
 all revisions to the codebase.
@@ -294,7 +294,7 @@ Requirements
    data structure and basic operations;
 -  `☞ <https://www.scipy.org/>`__\ ``scipy`` (``>= 0.11.0``), for linear
    algebra and numerical optimization;
--  `☞ <http://www.astropy.org/>`__\ ``astropy`` (unknown version), for
+-  `☞ <https://www.astropy.org/>`__\ ``astropy`` (unknown version), for
    loading FITS files with the ``astropy.io.fits`` module, which
    replaces the dependence on
    `☞ <https://pythonhosted.org/pyfits/>`__\ ``pyfits`` in earlier
@@ -323,7 +323,7 @@ Performance is mostly determined by the following two conditions:
 The script `☞ <scripts/jlacompress>`__\ ``jlacompress`` attempts to
 automatically create acceptable initial value and scaling that is
 optimized for the *default* compression used in the `JLA
-paper <http://arxiv.org/abs/1401.4064>`__. The automatic initial value
+paper <https://arxiv.org/abs/1401.4064>`__. The automatic initial value
 and scaling are not optimized for any other usage cases.
 
 Issue Tracker
