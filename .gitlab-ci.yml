@@ -1,6 +1,7 @@
 image: "registry.gitlab.com/congma/libsncompress/with-realdata:latest"
 
 variables:
+  RESTORE_CACHE_ATTEMPTS: 3
   LSNZ_GITLAB_CI_TESTDATA_BASE: "/realdata/testdata"
 
 before_script:
