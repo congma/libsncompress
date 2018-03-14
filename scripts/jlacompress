@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import sys
+import errno
+import os
 import os.path
 import argparse
-from six import print_
+from six import print_, string_types
 import numpy
 import scipy.linalg
 from libsncompress import base, evaluator
@@ -16,6 +18,34 @@ def unique(list_of_floats):
     sl = sorted(list_of_floats)
     slu = sorted(list(set(list_of_floats)))
     return sl == slu
+
+
+def mk_intermediate_dirs(path):
+    """Create intermediate directories to the file path."""
+    dirname = os.path.dirname(path)
+    # Make sure it exists.  This might fail, perhaps due to insufficient
+    # privileges, but should never fail due to EEXIST.
+    os.makedirs(dirname)
+
+
+def ensured_save(file_, arr, backend=numpy.savetxt, **kwargs):
+    """Wrapper around numpy's data output functions that ensures the
+    intermediate directories exist.
+    """
+    # There's no attempt in guarding the array to be saved against modification
+    # during the resumption tries.
+    try:
+        return backend(file_, arr, **kwargs)
+    except IOError as the_error:
+        # Following the evil implementation details of numpy.save().  Using the
+        # evil isinstance()
+        if the_error.errno != errno.ENOENT:     # Definitely not NOENT
+            raise                               # Fail as intended
+        if not isinstance(file_, string_types):
+            raise
+        # In this case, file_ is a path.
+        mk_intermediate_dirs(file_)
+        return ensured_save(file_, arr, backend, **kwargs)
 
 
 theparser = argparse.ArgumentParser(description="Compress the JLA dataset")
@@ -75,9 +105,9 @@ ffmt = "% .12e"
 covpath = "%s%s%s.txt" % (optns.output_prefix, "cov", suffix)
 meanpath = "%s%s%s.txt" % (optns.output_prefix, "mean", suffix)
 zpath = "%s%s%s.txt" % (optns.output_prefix, "redshift", suffix)
-numpy.savetxt(covpath, ce.compressed_cov, fmt=ffmt)
-numpy.savetxt(meanpath, res["x"], fmt=ffmt)
-numpy.savetxt(zpath,
-              numpy.power(10, numpy.fromiter(n.bins.itercontrolpoints(),
-                                             dtype=float)),
-              fmt=ffmt)
+ensured_save(covpath, ce.compressed_cov, fmt=ffmt)
+ensured_save(meanpath, res.x, fmt=ffmt)
+ensured_save(zpath,
+             numpy.power(10, numpy.fromiter(n.bins.itercontrolpoints(),
+                                            dtype=float)),
+             fmt=ffmt)

@@ -125,8 +125,9 @@ increasing redshift. In ``cov.txt``, the rows and columns are in the
 same order.
 
 If the prefix contains slash (``/``) characters, it will be understood
-as directory separators. The files will fail to write to their paths if
-the nested directory paths do not exist.
+as directory separators. If the directory part of a resulting path does
+not exist, it will be created if possible, and nested directories may be
+created by this process.
 
 The output files will have suffix ``-no-logdet`` appended to the path
 but before the ``.txt`` extension, if ``-n``/``--no-logdet`` is
