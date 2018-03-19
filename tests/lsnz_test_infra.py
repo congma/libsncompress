@@ -76,12 +76,15 @@ def data_basedir(envkey="LSNZ_TESTDATA_BASE"):
     return basedir
 
 
+TESTDATA_ROOT = data_basedir()
+
+
 @pytest.fixture(scope="session")
 def jla_target(vname="jla_mub.txt", covname="jla_mub_covmatrix.dat"):
     """Returns the JLA (B14) compression redshift, mean vector, and covariance
     matrix.
     """
-    vpath, covpath = search_for(data_basedir(), vname, covname)
+    vpath, covpath = search_for(TESTDATA_ROOT, vname, covname)
     varray = numpy.loadtxt(vpath)
     z = varray[:, 0]
     v = varray[:, 1]
@@ -95,7 +98,7 @@ def m16_target(vname="table_A1.txt", covname="table_A2.txt"):
     """Returns the M16 compression redshift, mean vector, and covariance
     matrix.
     """
-    vpath, covpath = search_for(data_basedir(), vname, covname)
+    vpath, covpath = search_for(TESTDATA_ROOT, vname, covname)
     varray = numpy.loadtxt(vpath)
     z = varray[:, 0]
     v = varray[:, 1]
@@ -107,8 +110,8 @@ def m16_target(vname="table_A1.txt", covname="table_A2.txt"):
 def jla_full_paths():
     """Returns the JLA data file paths needed by the computation.
     """
-    fits_cov_path, = search_for(data_basedir(), "covmat", fordirs=True)
-    table_path, = search_for(data_basedir(), "jla_lcparams.txt")
+    fits_cov_path, = search_for(TESTDATA_ROOT, "covmat", fordirs=True)
+    table_path, = search_for(TESTDATA_ROOT, "jla_lcparams.txt")
     return fits_cov_path, table_path
 
 
