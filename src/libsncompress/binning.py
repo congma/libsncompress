@@ -1,7 +1,8 @@
 # vim: spell spelllang=en
 
 import itertools
-from bisect import bisect_left
+from operator import add
+from bisect import bisect_left, bisect_right
 import six.moves as sm
 
 
@@ -185,11 +186,15 @@ class BinCollection(object):
         where chainid is the index of the chain, and relbinid
         is the relative id of this bin in the chain.
         """
+        try:
+            cl_cache = self._cl_cache
+        except AttributeError:
+            cl_cache = list(scanl1(add, self.chainlens))
+            self._cl_cache = cl_cache
         index = self._normalize_bin_index(index)
-        for i, chainlen in enumerate(self.chainlens):
-            index -= chainlen
-            if index < 0:
-                return (i, index + chainlen)
+        i = bisect_right(cl_cache, index)
+        relid = self.chainlens[i] - (cl_cache[i] - index)
+        return i, relid
 
     def getbin(self, index):
         """Get the nth bin given index."""
@@ -242,6 +247,20 @@ def pairwise(iterable):
     a, b = itertools.tee(iterable)
     next(b, None)
     return sm.zip(a, b)
+
+
+def scanl1(func, seq):
+    """Shamelessly copied from Haskell.
+    >>> a = sm.range(5)
+    >>> list(scanl1(add, a))
+    [0, 1, 3, 6, 10]
+    """
+    it = iter(seq)
+    res = next(it)
+    yield res
+    for thing in it:
+        res = func(res, thing)
+        yield res
 
 
 def areoverlapping(left, right):
