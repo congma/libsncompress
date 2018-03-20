@@ -41,6 +41,17 @@ def test_min_method_bfgs(ref_binned_sn, ref_ev):
     assert veryclose_p(ref_ev, ev)
 
 
+@pytest.mark.filterwarnings("ignore:Method Powell does not use Hessian")
+@pytest.mark.filterwarnings("ignore:Method Powell does not use gradient")
+def test_min_method_powell(ref_binned_sn, ref_ev):
+    ev = libsncompress.CovEvaluator(ref_binned_sn)
+    ev.minimize(method="Powell")
+    assert ev.res.success
+    # Do no check for closeness -- Powell's method has very poor convergence.
+    # This is just to check that the routines can go without the Jacobian and
+    # not break.
+
+
 @pytest.mark.parametrize("method", ["dogleg", "trust-exact"])
 def test_min_method_trust_regions(ref_binned_sn, ref_ev, method):
     ev = libsncompress.CovEvaluator(ref_binned_sn)
