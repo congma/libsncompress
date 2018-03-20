@@ -24,6 +24,7 @@ For your class to benefit from this memoization decorator, it must first
 inherit from our ArrayMethodCacheMixin class alongside with its other parent
 classes.  After that, you can use the memoized() function to create decorators
 that decorate your methods.  For example:
+>>> import sys
 >>> from six.moves import range
 >>> import numpy
 >>> class A(ArrayMethodCacheMixin, object):
@@ -48,6 +49,12 @@ that decorate your methods.  For example:
 ...     def eggs(self, array):
 ...         '''A special case for no-caching, for debug only.'''
 ...         return array * 2.0
+... 
+...     @memoized(cachetype=cachetools.LRUCache, cachesize=1,
+...               getsizeof=sys.getsizeof)
+...     def ham(self, array):
+...         '''A very small cache.'''
+...         return array
 
 After that, you can interactively test the effect of memoization by
 instantiating A:
@@ -85,8 +92,14 @@ After the first call to ta.spam(), it will have its own cache, too:
 Docstring of the decorated method is preserved as-is:
 >>> print(ta.frob.__doc__)
 Docstring for method frob is preserved.
->>> print (ta.eggs.__doc__)
+>>> print(ta.eggs.__doc__)
 A special case for no-caching, for debug only.
+
+If the cache is too small to store the array, it will be bypassed
+transparently.
+>>> _ = ta.ham(numpy.arange(4))
+>>> print(ta._cachedict["ham"])
+LRUCache([], maxsize=1, currsize=0)
 
 Author: Cong Ma <cong.ma@obspm.fr>, (c) 2015.  See the file COPYING.
 """
