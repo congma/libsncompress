@@ -64,6 +64,29 @@ def loadsntable(path):
     return fulltable
 
 
+def _extend_order(order):
+    """Extend an ordering of supernova objects to the corresponding ordering
+    that indexes the (mag, stretch, color) triplet in the FITS matrices.
+    """
+    extended_order = []
+    for i in order:
+        t = i * 3
+        extended_order.extend([t, t + 1, t + 2])
+    return numpy.array(extended_order, dtype=int)
+
+
+def _sort_table_and_basematrix(table, basematrix):
+    """Sort the table by z and apply the order to basematrix.
+    Returns sorted table and basematrix.
+    """
+    n = table.shape[0]
+    order = numpy.argsort(table[:, 0], kind="mergesort")
+    table_sorted = table[order]
+    extended_order = _extend_order(order)
+    basematrix_sorted = basematrix[numpy.ix_(extended_order, extended_order)]
+    return table_sorted, basematrix_sorted
+
+
 def _create_default_logbins():
     return numpy.asarray([numpy.linspace(-2, numpy.log10(1.3), 31)])
 
@@ -103,10 +126,7 @@ def _create_base_block(ids, basematrix):
         which corresponds to peak B-magnitude, stretch, and color parameters
         respectively.
     """
-    mids = []
-    for i in ids:
-        t = i * 3
-        mids.extend([t, t + 1, t + 2])
+    mids = _extend_order(ids)
     section = basematrix[numpy.ix_(mids, mids)]
     bblock = numpy.empty((3, 3, len(ids), len(ids)))
     for i in sm.range(3):
@@ -151,7 +171,7 @@ class BinnedSN(object):
         binidcontent: Mapping object that maps a bin id to a set
                       of data ids that are in the bin.
     """
-    def __init__(self, basedirpath, tablepath, logbins=None):
+    def __init__(self, basedirpath, tablepath, logbins=None, sort_by_z=False):
         """Initialize a BinnedSN instance by loading the data files
         and performing binning.
 
@@ -160,9 +180,11 @@ class BinnedSN(object):
                      matrix.
         tablepath: Path to the text file containing the data table.
         logbins: Optional, ordered collection of ordered collection of numbers
-              that are the log-control points of the bins.  If not given, the
-              default binning method is used, which is the one adapted to
-              follow B14.
+                 that are the log-control points of the bins.  If not given,
+                 the default binning method is used, which is the one adapted
+                 to follow B14.
+        sort: If True, the table and corresponding matrix will be sorted by
+              redshift in ascending order (default: False)
         """
         if logbins is None:     # Use default binning scheme.
             self.bins = binning.BinCollection(_create_default_logbins())
@@ -173,6 +195,8 @@ class BinnedSN(object):
         # Symmetrize?
         basematrix = (basematrix + basematrix.T) / 2.0
         table = loadsntable(tablepath)
+        if sort_by_z:
+            table, basematrix = _sort_table_and_basematrix(table, basematrix)
         # Remove all data points that are out-of-bins.
         ids, binresults = _filter_items_by_bins(numpy.log10(table[:, 0]),
                                                 self.bins)
