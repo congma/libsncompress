@@ -86,3 +86,15 @@ def test_min_sorted(jla_full_paths, ref_ev):
     assert ev.res.success
     assert numpy.allclose(ref_ev.res.x, ev.res.x)
     assert numpy.allclose(ref_ev.compressed_cov, ev.compressed_cov)
+
+
+def test_min_onebigbin(jla_full_paths):
+    binned_sn_1b = libsncompress.BinnedSN(*jla_full_paths,
+                                          logbins=[[-2.0, numpy.log10(1.3)]])
+    ev = libsncompress.CovEvaluator(binned_sn_1b)
+    ev.minimize()
+    # This is a garbage-in case, but we should at least converge to the
+    # outgarbage.
+    assert ev.res.success
+    # The output should at least have some basic properties, bad as it is.
+    assert ev.res.x[-1] >= ev.res.x[-2]
