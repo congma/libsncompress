@@ -45,9 +45,11 @@ def test_min_method_bfgs(ref_binned_sn, ref_ev):
 @pytest.mark.filterwarnings("ignore:Method Powell does not use gradient")
 def test_min_method_powell(ref_binned_sn, ref_ev):
     ev = libsncompress.CovEvaluator(ref_binned_sn)
-    ev.minimize(method="Powell")
+    ev.minimize(method="Powell", jac=lambda x: None, hess=lambda x: None,
+                options=dict(xtol=5e-3, ftol=5e-3))
     assert ev.res.success
     # Do no check for closeness -- Powell's method has very poor convergence.
+    # In addition we use very big convergence tolerances deliberately.
     # This is just to check that the routines can go without the Jacobian and
     # not break.
 
