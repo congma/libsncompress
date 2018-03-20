@@ -1,6 +1,7 @@
 # vim: spell spelllang=en
 
 import itertools
+from bisect import bisect_left
 import six.moves as sm
 
 
@@ -25,16 +26,29 @@ class BinCollection(object):
     >>> c.nbins
     6
 
-    To search for the bin to which a number belongs, use searchenum()
-    >>> c.searchenum(4.2)
-    (2, (4, 5))
+    To search for the bin to which a number belongs, use searchenum(),
+    which finds the leftmost bin to which the number resides in.
     >>> c.searchenum(2.2)
     (1, (2, 3))
+    >>> c.searchenum(4.2)
+    (2, (4, 5))
+    >>> c.searchenum(9.00001)
+    (5, (9, 12))
+    >>> c.searchenum(1)
+    (0, (1, 2))
+    >>> c.searchenum(4)
+    (2, (4, 5))
     >>> c.searchenum(5)
     (2, (4, 5))
+    >>> c.searchenum(6.0)
+    (3, (6, 7))
     >>> c.searchenum(7)
-    (4, (7, 9))
+    (3, (6, 7))
+    >>> c.searchenum(0.99999) == (None, (None, None))
+    True
     >>> c.searchenum(5.5) == (None, (None, None))
+    True
+    >>> c.searchenum(12.1) == (None, (None, None))
     True
 
     To split a bin index into the chain and bin-in-chain parts, use
@@ -119,6 +133,9 @@ class BinCollection(object):
         self.chainlens = [len(chain) - 1 for chain in vchains]
         self.nbins = sum(self.chainlens)
         self.ncontrolpoints = self.nbins + self.nchains
+        b_cache = list(self.iterbins())
+        self._lefts_cache = [x[0] for x in b_cache]
+        self._rights_cache = [x[1] for x in b_cache]
         return None
 
     def itercontrolpoints(self):
@@ -156,11 +173,10 @@ class BinCollection(object):
         (binindex, (bin_lower, bin_upper));  if not, return
         (None, (None, None)).
         """
-        rlist = list(self.iterbins())
-        rlist.reverse()
-        for i, (lower, upper) in enumerate(rlist):
-            if lower <= item <= upper:
-                return (self.nbins - i - 1, (lower, upper))
+        # Cf: Python Library Reference, "bisect", "Searching Sorted Lists"
+        i = bisect_left(self._rights_cache, item)
+        if i != self.nbins and item >= self._lefts_cache[i]:
+            return (i, (self._lefts_cache[i], self._rights_cache[i]))
         return (None, (None, None))
 
     def binaddress(self, index):
