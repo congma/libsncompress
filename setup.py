@@ -62,7 +62,7 @@ else:
 
 
 pname = "libsncompress"
-setup(name=pname, version="0.0.3",
+setup(name=pname, version="0.0.4",
       description="Compress JLA-like supernova data",
       long_description=rst_text,
       author="Cong Ma",
