@@ -64,3 +64,12 @@ def test_min_alter_scalings(ref_binned_sn, ref_ev):
     ev.minimize(xscalings=xs)
     assert ev.res.success
     assert veryclose_p(ref_ev, ev)
+
+
+def test_min_sorted(jla_full_paths, ref_ev):
+    binned_sn_sorted = libsncompress.BinnedSN(*jla_full_paths, sort_by_z=True)
+    ev = libsncompress.CovEvaluator(binned_sn_sorted)
+    ev.minimize()
+    assert ev.res.success
+    assert numpy.allclose(ref_ev.res.x, ev.res.x)
+    assert numpy.allclose(ref_ev.compressed_cov, ev.compressed_cov)
