@@ -56,7 +56,7 @@ job_testpypi:
     name: testpypi
     url: https://test.pypi.org/
   only:
-    - '/^v(\d+!)?\d+(\.\d+)*((a|b|rc)\d+|\.dev\d+)?$/'
+    - '/^v(\d+!)?\d+(\.\d+)*((a|b|rc)\d+|\.post\d+|\.dev\d+)?$/'
   variables:
     TWINE_REPOSITORY: testpypi
     TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
