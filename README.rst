@@ -1,7 +1,7 @@
 libsncompress
 =============
 
-|pipeline| |coverage| |license| |pythons|
+|pipeline| |coverage| |pypi| |license| |pyversions|
 
 Summary
 -------
@@ -438,7 +438,9 @@ The following BibTeX entry could be useful in a LaTeX document:
    :target: https://gitlab.com/congma/libsncompress/commits/master
 .. |coverage| image:: https://gitlab.com/congma/libsncompress/badges/master/coverage.svg
    :target: https://gitlab.com/congma/libsncompress/commits/master
-.. |license| image:: https://img.shields.io/badge/license-BSD-yellow.svg
+.. |pypi| image:: https://img.shields.io/pypi/v/libsncompress.svg
+   :target: https://pypi.org/project/libsncompress/
+.. |license| image:: https://img.shields.io/pypi/l/libsncompress.svg?longCache=true
    :target: https://gitlab.com/congma/libsncompress/blob/master/COPYING
-.. |pythons| image:: https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg
+.. |pyversions| image:: https://img.shields.io/pypi/pyversions/libsncompress.svg
    :target: #description
