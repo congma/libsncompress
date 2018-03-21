@@ -62,7 +62,7 @@ job_testpypi:
     TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
     TWINE_USERNAME: congma
   script:
-    - python setup.py sdist
+    - python setup.py sdist bdist_wheel
     - twine upload -p $GLCD_TESTPYPI_PW dist/libsncompress-*.tar.gz
 
 job_pypi:
@@ -78,5 +78,5 @@ job_pypi:
     TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
     TWINE_USERNAME: congma
   script:
-    - python setup.py sdist
+    - python setup.py sdist bdist_wheel
     - twine upload -p $GLCD_PYPI_PW dist/libsncompress-*.tar.gz

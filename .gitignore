@@ -30,6 +30,9 @@ testdata/*
 # CSCope databases
 *cscope.out*
 
+# Signatures
+*.asc
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
