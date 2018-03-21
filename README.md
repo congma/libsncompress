@@ -1,23 +1,25 @@
-[![pipeline status](https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg)](https://gitlab.com/congma/libsncompress/commits/master)
-[![coverage 
-report](https://gitlab.com/congma/libsncompress/badges/master/coverage.svg)](https://gitlab.com/congma/libsncompress/commits/master)
+# libsncompress
+
+[![pipeline](https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg)](https://gitlab.com/congma/libsncompress/commits/master)
+[![coverage](https://gitlab.com/congma/libsncompress/badges/master/coverage.svg)](https://gitlab.com/congma/libsncompress/commits/master)
 [![license](https://img.shields.io/badge/license-BSD-yellow.svg)](https://gitlab.com/congma/libsncompress/blob/master/COPYING)
-[![Python versions](https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg)](#description)
+[![pythons](https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg)](#description)
 
 ## Summary ##
 
 `libsncompress` -- efficient and reproducible Python utility for compressing 
 supernova cosmological data.
 
+
 ## Description ##
 
-The Python package `libsncompress` implements the linear compression method
+The Python package `libsncompress` implements the linear compression method 
 described in the paper "Application of Bayesian graphs to SN Ia data analysis
 and compression" (C.&nbsp;Ma, P.-S.&nbsp;Corasaniti, & 
 B.&nbsp;A.&nbsp;Bassett, 2016, [MNRAS, submitted][m16], "M16"; accepted 
 version: 2016 MNRAS, 463, 1651, <abbr
 title="Digital Object Identifier">DOI</abbr>: 
-[☞][m16a]`10.1093/mnras/stw2069`, BibCode: [☞][m16ads]`2016MNRAS.463.1651M`).  
+[☞][m16a]`10.1093/mnras/stw2069`, BibCode: [☞][m16ads]`2016MNRAS.463.1651M`).
 It is designed for use with the [JLA][jla] dataset, but can be easily extended 
 for other similar datasets.
 
@@ -32,16 +34,16 @@ The programs work with both Python 2.7 and 3.6.
 
 To obtain the full package source, you can clone the repository using `git`:
 
-```bash
+```
 git clone https://gitlab.com/congma/libsncompress.git
 ```
 
 Additional Python packages are required (please refer to the section 
-"[Requirements](#requirements)" for the list of dependencies of the current 
-version).  The recommended installation method is to invoke `pip` from the 
+"[Requirements](#requirements)" for the list of dependencies of the current
+version).  The recommended installation method is to invoke `pip` from the
 source directory:
 
-```bash
+```
 pip install .
 ```
 
@@ -53,7 +55,7 @@ work fine.
 Alternatively, the package and script can also be installed using the
 `setuptools` setup script:
 
-```bash
+```
 python setup.py install
 ```
 
@@ -72,8 +74,8 @@ the compression of the [JLA][jla] dataset, as done in our [M16][m16] paper.
 jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z [z ...]] [-n] [-v]
 ```
 
-The script requires JLA data files to run.  See the section [Data 
-Files](#data-files) for details.
+The script requires JLA data files to run.  See the section
+"[Data Files](#data-files)" for details.
 
 ### Options ###
 
@@ -133,7 +135,7 @@ The script exits with `0` for success.  Any other value indicates error.
 Assuming the data files are in their default locations, the following command 
 reproduces the default compression results in the [JLA paper][jla].
 
-```bash
+```
 jlacompress -n
 ```
 
@@ -157,7 +159,7 @@ The following *two* files must be downloaded:
 The `git` source repository includes a shell script to download and extract 
 these files: [☞][downloadscript]`download_jla.sh`.  This script is meant to be 
 run manually.  Simply invoking the script in the repository directory
-```bash
+```
 ./download_jla.sh
 ```
 will suffice -- this will populate the `testdata` directory with the necessary 
@@ -289,7 +291,7 @@ for the *default* compression used in the [JLA paper][jla].  The automatic
 initial value and scaling are not optimized for any other usage cases.
 
 
-## Issue Tracker ##
+## Reporting Bugs ##
 
 Please report problems via the [issue tracker][issues].
 
@@ -311,7 +313,6 @@ The following BibTeX entry could be useful in a LaTeX document:
   journal = {MNRAS},
 archivePrefix = "arXiv",
    eprint = {1603.08519},
- keywords = {cosmological parameters, distance scale, methods: data analysis, methods: statistical, supernovae: general, cosmolo-gical parameters},
      year = 2016,
     month = dec,
    volume = 463,
@@ -324,8 +325,8 @@ archivePrefix = "arXiv",
 [m16]: https://arxiv.org/abs/1603.08519 "The M16 paper (preprint)"
 [m16a]: https://doi.org/10.1093/mnras/stw2069 "The M16 paper (accepted version, subscription required)"
 [m16ads]: http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M "The M16 paper's entry in SAO/NASA ADS"
-[local-scripts-jlacompress]: scripts/jlacompress
-[downloadscript]: download_jla.sh
+[local-scripts-jlacompress]: https://gitlab.com/congma/libsncompress/blob/master/scripts/jlacompress
+[downloadscript]: https://gitlab.com/congma/libsncompress/blob/master/download_jla.sh
 [jla]: https://arxiv.org/abs/1401.4064 "JLA reference paper"
 [jlarm]: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html "JLA project"
 [jlatarball]: http://supernovae.in2p3.fr/sdss_snls_jla/jla_likelihood_v6.tgz
@@ -339,7 +340,3 @@ archivePrefix = "arXiv",
 [ct]: https://pythonhosted.org/cachetools/ "cachetools"
 [issues]: https://gitlab.com/congma/libsncompress/issues "Issue tracker"
 [netliblapack]: http://www.netlib.org/lapack/ "NetLib LAPACK"
-
-<!--
-vim: ft=markdown tw=78 fo+=tqwn spell spelllang=en et ts=4
--->

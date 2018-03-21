@@ -2,6 +2,7 @@
 import sys
 import os
 import os.path
+from glob import glob
 import errno
 from setuptools import setup, find_packages
 import six
@@ -23,7 +24,8 @@ def get_rst_text_from_md(path):
         # This is the case when pypandoc isn't available.
         return None
     # Use PyPandoc to convert the markdown, and overwrite the .rst file
-    return pypandoc.convert_text(orig_text, "rst", "md")
+    return pypandoc.convert_text(orig_text, "rst", "md",
+                                 extra_args=["--reference-links"])
 
 
 def should_convert_p(from_path, to_path):
@@ -62,7 +64,7 @@ else:
 
 
 pname = "libsncompress"
-setup(name=pname, version="0.0.4",
+setup(name=pname, version="0.0.5rc2",
       description="Compress JLA-like supernova data",
       long_description=rst_text,
       author="Cong Ma",
@@ -70,7 +72,8 @@ setup(name=pname, version="0.0.4",
       url="https://gitlab.com/congma/libsncompress/",
       packages=find_packages("src"),
       package_dir={"": "src"},
-      scripts=[os.path.join("scripts", "jlacompress")],
+      scripts=["scripts/jlacompress"],
+      data_files=[("share/libsncompress", glob("testdata/m16/table_*.txt"))],
       install_requires=["six", "numpy >= 1.6.0", "scipy >= 0.11.0", "astropy",
                         "cachetools"],
       setup_requires=["six", "pypandoc"],

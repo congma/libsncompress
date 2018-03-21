@@ -1,7 +1,7 @@
-include README.md
 include README.rst
+include README.md
 include COPYING
-prune testdata
-graft testdata/m16
+recursive-include testdata/m16 table_*.txt
 global-exclude *cov.txt *mean.txt *redshift.txt
+global-exclude jla*.txt jla*.dat covmat *.fits covmat*.tgz jla_likelihood*.tgz
 global-exclude download_jla.sh

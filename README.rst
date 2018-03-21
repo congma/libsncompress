@@ -1,4 +1,7 @@
-|pipeline status| |coverage report| |license| |Python versions|
+libsncompress
+=============
+
+|pipeline| |coverage| |license| |pythons|
 
 Summary
 -------
@@ -9,22 +12,18 @@ compressing supernova cosmological data.
 Description
 -----------
 
-| The Python package ``libsncompress`` implements the linear compression
-  method described in the paper "Application of Bayesian graphs to SN Ia
-  data analysis and compression" (C. Ma, P.-S. Corasaniti, &
-  B. A. Bassett, 2016, `MNRAS,
-  submitted <https://arxiv.org/abs/1603.08519>`__, "M16"; accepted
-  version: 2016 MNRAS, 463, 1651, DOI:
-  `☞ <https://doi.org/10.1093/mnras/stw2069>`__\ ``10.1093/mnras/stw2069``,
-  BibCode:
-  `☞ <http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M>`__\ ``2016MNRAS.463.1651M``).
-| It is designed for use with the
-  `JLA <https://arxiv.org/abs/1401.4064>`__ dataset, but can be easily
-  extended for other similar datasets.
+The Python package ``libsncompress`` implements the linear compression
+method described in the paper "Application of Bayesian graphs to SN Ia
+data analysis and compression" (C. Ma, P.-S. Corasaniti, &
+B. A. Bassett, 2016, `MNRAS, submitted`_, "M16"; accepted version: 2016
+MNRAS, 463, 1651, DOI: `☞`_\ ``10.1093/mnras/stw2069``, BibCode:
+`☞ <http://adsabs.harvard.edu/abs/2016MNRAS.463.1651M>`__\ ``2016MNRAS.463.1651M``).
+It is designed for use with the `JLA`_ dataset, but can be easily
+extended for other similar datasets.
 
 It also includes a Python executable script,
-`☞ <scripts/jlacompress>`__\ ``jlacompress``, that serves as an example
-command-line user interface.
+`☞ <https://gitlab.com/congma/libsncompress/blob/master/scripts/jlacompress>`__\ ``jlacompress``,
+that serves as an example command-line user interface.
 
 The programs work with both Python 2.7 and 3.6.
 
@@ -34,16 +33,16 @@ Installation
 To obtain the full package source, you can clone the repository using
 ``git``:
 
-.. code:: bash
+::
 
     git clone https://gitlab.com/congma/libsncompress.git
 
 Additional Python packages are required (please refer to the section
-"`Requirements <#requirements>`__" for the list of dependencies of the
-current version). The recommended installation method is to invoke
-``pip`` from the source directory:
+"`Requirements`_" for the list of dependencies of the current version).
+The recommended installation method is to invoke ``pip`` from the source
+directory:
 
-.. code:: bash
+::
 
     pip install .
 
@@ -55,7 +54,7 @@ this repository. For most users, this is unnecessary, and
 Alternatively, the package and script can also be installed using the
 ``setuptools`` setup script:
 
-.. code:: bash
+::
 
     python setup.py install
 
@@ -67,9 +66,8 @@ JLA Compression Script
 ----------------------
 
 This utility comes with an executable script ``jlacompress`` that is
-tailored to the compression of the
-`JLA <https://arxiv.org/abs/1401.4064>`__ dataset, as done in our
-`M16 <https://arxiv.org/abs/1603.08519>`__ paper.
+tailored to the compression of the `JLA`_ dataset, as done in our `M16`_
+paper.
 
 Synopsis
 ~~~~~~~~
@@ -78,8 +76,8 @@ Synopsis
 
     jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z [z ...]] [-n] [-v]
 
-The script requires JLA data files to run. See the section `Data
-Files <#data-files>`__ for details.
+The script requires JLA data files to run. See the section "`Data
+Files`_" for details.
 
 Options
 ~~~~~~~
@@ -93,8 +91,7 @@ Options
    names
 -  ``-c z [z ...]``, ``--controls z [z ...]``: locations of control
    points (as redshift). At least two control points are required. If
-   unspecified, use the default control points in the `JLA
-   paper <https://arxiv.org/abs/1401.4064>`__.
+   unspecified, use the default control points in the `JLA paper`_.
 -  ``-n``, ``--no-logdet``: don't use the correct conditional
    probability (default: off; *warning:* use at your own risk)
 -  ``-v``, ``--verbose``: turn on verbose output (default: off)
@@ -146,10 +143,9 @@ Example Usage
 ~~~~~~~~~~~~~
 
 Assuming the data files are in their default locations, the following
-command reproduces the default compression results in the `JLA
-paper <https://arxiv.org/abs/1401.4064>`__.
+command reproduces the default compression results in the `JLA paper`_.
 
-.. code:: bash
+::
 
     jlacompress -n
 
@@ -158,8 +154,7 @@ Data Files
 
 The JLA data files are *required* for using the package. However, we
 cannot distribute them with the source package. Please read the `JLA
-readme <http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html>`__ page
-for details about the data files.
+readme`_ page for details about the data files.
 
 The following *two* files must be downloaded:
 
@@ -174,11 +169,12 @@ The following *two* files must be downloaded:
    The non-FITS files in this archive are not necessary.
 
 The ``git`` source repository includes a shell script to download and
-extract these files: `☞ <download_jla.sh>`__\ ``download_jla.sh``. This
-script is meant to be run manually. Simply invoking the script in the
-repository directory
+extract these files:
+`☞ <https://gitlab.com/congma/libsncompress/blob/master/download_jla.sh>`__\ ``download_jla.sh``.
+This script is meant to be run manually. Simply invoking the script in
+the repository directory
 
-.. code:: bash
+::
 
     ./download_jla.sh
 
@@ -259,9 +255,8 @@ approximate covariance of compression parameters.
 
 Please notice that this implementation here is not a general, abstract
 implementation of the linear compression method detailed in `our
-paper <https://arxiv.org/abs/1603.08519>`__. It specifically implements
-the sawtooth-basis compression, which is compatible with the original
-`JLA one <https://arxiv.org/abs/1401.4064>`__. The implementation
+paper`_. It specifically implements the sawtooth-basis compression,
+which is compatible with the original `JLA one`_. The implementation
 details, as well as the exposed API, are likely to see significant
 revisions in the future.
 
@@ -271,17 +266,14 @@ Reproducibility Tests
 One important goal of the test suits in this repository is to ensure
 that the results of JLA SNIa compression are always reproducible.
 
-First, as we have shown in `M16 <https://arxiv.org/abs/1603.08519>`__,
-the `JLA <https://arxiv.org/abs/1401.4064>`__ compression results (their
+First, as we have shown in `M16`_, the `JLA`_ compression results (their
 Tables F.1 and F.2), especially the covariance matrix, are "very close"
-to the ones obtained using this program on the `JLA data
-release <http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html>`__, but
+to the ones obtained using this program on the `JLA data release`_, but
 with the (highly discouraged) ``withlogdet=False`` option enabled for
 ``libsncompress.CovEvaluator``.
 
 Second, the compression results produced by this program on the released
-JLA data must match those presented in
-`M16 <https://arxiv.org/abs/1603.08519>`__, Tables A1 and A2.
+JLA data must match those presented in `M16`_, Tables A1 and A2.
 
 The reproducibility tests check that these constraints are satisfied by
 all revisions to the codebase.
@@ -311,27 +303,26 @@ Performance is mostly determined by the following two conditions:
 
 1. Underlying BLAS/LAPACK libraries used by ``numpy``/``scipy``,
    especially the "linear solver by Cholesky decomposition",
-   ``(D)POTRS`` function of LAPACK. For `NetLib
-   LAPACK <http://www.netlib.org/lapack/>`__, this in turn is largely
-   determined by the speed of the level-3 BLAS triangular solver,
-   ``(D)TRSM``. The NetLib reference implementation is rather naive, and
-   an optimized implementation of BLAS is likely to boost the
+   ``(D)POTRS`` function of LAPACK. For `NetLib LAPACK`_, this in turn
+   is largely determined by the speed of the level-3 BLAS triangular
+   solver, ``(D)TRSM``. The NetLib reference implementation is rather
+   naive, and an optimized implementation of BLAS is likely to boost the
    performance.
 2. Choice of initial value and scaling for numerical optimization. If
    they are suitably chosen, the number of iterations required to
    achieve convergence is reduced.
 
-The script `☞ <scripts/jlacompress>`__\ ``jlacompress`` attempts to
-automatically create acceptable initial value and scaling that is
-optimized for the *default* compression used in the `JLA
-paper <https://arxiv.org/abs/1401.4064>`__. The automatic initial value
-and scaling are not optimized for any other usage cases.
+The script
+`☞ <https://gitlab.com/congma/libsncompress/blob/master/scripts/jlacompress>`__\ ``jlacompress``
+attempts to automatically create acceptable initial value and scaling
+that is optimized for the *default* compression used in the `JLA
+paper`_. The automatic initial value and scaling are not optimized for
+any other usage cases.
 
-Issue Tracker
--------------
+Reporting Bugs
+--------------
 
-Please report problems via the `issue
-tracker <https://gitlab.com/congma/libsncompress/issues>`__.
+Please report problems via the `issue tracker`_.
 
 Bibliography
 ------------
@@ -340,7 +331,7 @@ If you use this program in your research, we would like to suggest you
 cite the following paper ("M16"):
 
 Ma, C., Corasaniti, P.-S., & Bassett, B. A. 2016, MNRAS, 463, 1651,
-`☞ <https://doi.org/10.1093/mnras/stw2069>`__\ ``doi: 10.1093/mnras/stw2069``
+`☞`_\ ``doi: 10.1093/mnras/stw2069``
 
 The following BibTeX entry could be useful in a LaTeX document:
 
@@ -352,7 +343,6 @@ The following BibTeX entry could be useful in a LaTeX document:
       journal = {MNRAS},
     archivePrefix = "arXiv",
        eprint = {1603.08519},
-     keywords = {cosmological parameters, distance scale, methods: data analysis, methods: statistical, supernovae: general, cosmolo-gical parameters},
          year = 2016,
         month = dec,
        volume = 463,
@@ -360,17 +350,25 @@ The following BibTeX entry could be useful in a LaTeX document:
           doi = {10.1093/mnras/stw2069}
     }
 
-.. raw:: html
+.. _MNRAS, submitted: https://arxiv.org/abs/1603.08519
+.. _☞: https://doi.org/10.1093/mnras/stw2069
+.. _JLA: https://arxiv.org/abs/1401.4064
+.. _Requirements: #requirements
+.. _M16: https://arxiv.org/abs/1603.08519
+.. _Data Files: #data-files
+.. _JLA paper: https://arxiv.org/abs/1401.4064
+.. _JLA readme: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html
+.. _our paper: https://arxiv.org/abs/1603.08519
+.. _JLA one: https://arxiv.org/abs/1401.4064
+.. _JLA data release: http://supernovae.in2p3.fr/sdss_snls_jla/ReadMe.html
+.. _NetLib LAPACK: http://www.netlib.org/lapack/
+.. _issue tracker: https://gitlab.com/congma/libsncompress/issues
 
-   <!--
-   vim: ft=markdown tw=78 fo+=tqwn spell spelllang=en et ts=4
-   -->
-
-.. |pipeline status| image:: https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg
+.. |pipeline| image:: https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg
    :target: https://gitlab.com/congma/libsncompress/commits/master
-.. |coverage report| image:: https://gitlab.com/congma/libsncompress/badges/master/coverage.svg
+.. |coverage| image:: https://gitlab.com/congma/libsncompress/badges/master/coverage.svg
    :target: https://gitlab.com/congma/libsncompress/commits/master
 .. |license| image:: https://img.shields.io/badge/license-BSD-yellow.svg
    :target: https://gitlab.com/congma/libsncompress/blob/master/COPYING
-.. |Python versions| image:: https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg
+.. |pythons| image:: https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg
    :target: #description
