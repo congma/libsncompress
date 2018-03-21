@@ -2,8 +2,9 @@
 
 [![pipeline](https://gitlab.com/congma/libsncompress/badges/master/pipeline.svg)](https://gitlab.com/congma/libsncompress/commits/master)
 [![coverage](https://gitlab.com/congma/libsncompress/badges/master/coverage.svg)](https://gitlab.com/congma/libsncompress/commits/master)
-[![license](https://img.shields.io/badge/license-BSD-yellow.svg)](https://gitlab.com/congma/libsncompress/blob/master/COPYING)
-[![pythons](https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg)](#description)
+[![pypi](https://img.shields.io/pypi/v/libsncompress.svg)](https://pypi.org/project/libsncompress/)
+[![license](https://img.shields.io/pypi/l/libsncompress.svg?longCache=true)](https://gitlab.com/congma/libsncompress/blob/master/COPYING)
+[![pyversions](https://img.shields.io/pypi/pyversions/libsncompress.svg)](#description)
 
 
 ## Summary ##
