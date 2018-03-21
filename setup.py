@@ -25,7 +25,8 @@ def get_rst_text_from_md(path):
         return None
     # Use PyPandoc to convert the markdown, and overwrite the .rst file
     return pypandoc.convert_text(orig_text, "rst", "md",
-                                 extra_args=["--reference-links"])
+                                 extra_args=["--reference-links",
+                                             "--strip-comments"])
 
 
 def should_convert_p(from_path, to_path):
@@ -64,7 +65,7 @@ else:
 
 
 pname = "libsncompress"
-setup(name=pname, version="0.0.5rc2",
+setup(name=pname, version="0.0.5rc4",
       description="Compress JLA-like supernova data",
       long_description=rst_text,
       author="Cong Ma",
