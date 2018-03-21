@@ -54,7 +54,7 @@ job_testpypi:
   <<: *pypi_boiler
   environment:
     name: testpypi
-    url: https://test.pypi.org/
+    url: https://test.pypi.org/project/libsncompress/
   only:
     - '/^v(\d+!)?\d+(\.\d+)*((a|b|rc)\d+|\.post\d+|\.dev\d+)?$/'
   variables:
@@ -70,7 +70,7 @@ job_pypi:
   when: manual
   environment:
     name: production
-    url: https://pypi.org/
+    url: https://pypi.org/project/libsncompress/
   only:
     - '/^v(\d+!)?\d+(\.\d+)*(\.post\d+)?$/'
   variables:
