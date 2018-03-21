@@ -186,7 +186,7 @@ run.
 
 ## Testing and Development ##
 
-### Using `libsncompress` in your project ###
+### Using `libsncompress` in Your Project ###
 
 To use the package directly in your own Python project, simply
 
