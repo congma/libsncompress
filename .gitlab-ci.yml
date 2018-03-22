@@ -21,6 +21,7 @@ before_script:
                                           tox
   - pip install --upgrade --no-cache-dir pip
   - pip install --upgrade --no-cache-dir tox
+  - pip install --upgrade --no-cache-dir detox
 
 stages:
   - test
@@ -29,7 +30,8 @@ stages:
 job_test:
   stage: test
   script:
-    - tox
+    - tox -e detox -e py2,py3
+    - tox -e coverage-report
   coverage: '/^TOTAL\b.+\s+([+-]?(?:\d*\.)?\d+%)\s*$/'
   cache:
     key: "$CI_JOB_STAGE"
