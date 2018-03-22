@@ -1,0 +1,14 @@
+# vim: ft=dosini syntax=dosini
+[run]
+branch = True
+source = libsncompress
+
+[paths]
+source =
+  src/libsncompress
+  .tox/py*/lib/python*/site-packages/libsncompress
+
+[report]
+precision = 3
+show_missing = True
+sort = Cover
