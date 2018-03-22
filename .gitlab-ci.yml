@@ -19,6 +19,7 @@ before_script:
                                           python-pytest python3-pytest \
                                           python-coverage python3-coverage \
                                           tox
+  - apt-get -o Dpkg::Options::="--force-confmiss" install --reinstall netbase
   - pip install --upgrade --no-cache-dir pip
   - pip install --upgrade --no-cache-dir tox
   - pip install --upgrade --no-cache-dir detox
