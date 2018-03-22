@@ -31,7 +31,7 @@ stages:
 job_test:
   stage: test
   script:
-      - detox -n2 -e py2,py3
+    - detox -n2 -e py2,py3
     - tox -e coverage-report
   coverage: '/^TOTAL\b.+\s+([+-]?(?:\d*\.)?\d+%)\s*$/'
   cache:
