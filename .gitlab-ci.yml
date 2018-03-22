@@ -63,7 +63,7 @@ job_cover:
   stage: covreport
   image: ubuntu:artful
   before_script:
-    - apt-get update -qq -y && apt-get install -y -qq python-coverage pip
+    - apt-get update -qq -y && apt-get install -y -qq python-coverage python-pip
     - pip install --upgrade --no-cache-dir pip
     - pip install --upgrade --no-cache-dir coverage
   variables:
