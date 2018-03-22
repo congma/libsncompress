@@ -61,7 +61,7 @@ job_test_py3:
 
 job_cover:
   stage: covreport
-  image: artful
+  image: ubuntu:artful
   before_script:
     - apt-get update -qq -y && apt-get install -y -qq python-coverage pip
     - pip install --upgrade --no-cache-dir pip
