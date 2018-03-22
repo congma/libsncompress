@@ -4,7 +4,7 @@
 [![coverage](https://gitlab.com/congma/libsncompress/badges/master/coverage.svg)](https://gitlab.com/congma/libsncompress/commits/master)
 [![pypi](https://img.shields.io/pypi/v/libsncompress.svg)](https://pypi.org/project/libsncompress/)
 [![license](https://img.shields.io/pypi/l/libsncompress.svg?longCache=true)](https://gitlab.com/congma/libsncompress/blob/master/COPYING)
-[![pyversions](https://img.shields.io/pypi/pyversions/libsncompress.svg)](#description)
+[![pyversions](https://img.shields.io/pypi/pyversions/libsncompress.svg)](#introduction)
 
 
 ## Summary ##
@@ -13,7 +13,7 @@
 supernova cosmological data.
 
 
-## Description ##
+## Introduction ##
 
 The Python package `libsncompress` implements the linear compression method 
 described in the paper "Application of Bayesian graphs to SN Ia data analysis
@@ -57,7 +57,7 @@ pip install -U libsncompress
 ```
 
 Additional Python packages are required at runtime (please refer to the 
-section "[Requirements](#requirements)" for the list of dependencies of the 
+section "[Dependencies](#dependencies)" for the list of dependencies of the 
 current version).  The recommended installation method is to use the above 
 command, which will make sure that the supporting packages are installed 
 automatically.
@@ -86,7 +86,7 @@ the compression of the [JLA][jla] dataset, as done in our [M16][m16] paper.
 ### Synopsis ###
 
 ```
-jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z [z ...]] [-n] [-v]
+jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z1 z2 [...]] [-n] [-v]
 ```
 
 The script requires JLA data files to run.  See the section
@@ -101,7 +101,7 @@ The script requires JLA data files to run.  See the section
 *  `-t FILE`, `--table FILE`: path to JLA data table file (default: 
    `./jla_lcparams.txt`)
 *  `-p PREFIX`, `--output-prefix PREFIX`: prefix to output file names
-*  `-c z [z ...]`, `--controls z [z ...]`: locations of control points (as 
+*  `-c z1 z2 [...]`, `--controls z1 z2 [...]`: locations of control points (as 
    redshift).  At least two control points are required.  If unspecified, use 
    the default control points in the [JLA paper][jla].
 *  `-n`, `--no-logdet`: don't use the correct conditional probability 
@@ -171,9 +171,9 @@ If the JLA data archives are already downloaded, you simply need to extract
 the required files and specify their locations when using the `jlacompress` 
 script, as described [above](#command-line-options).
 
-The `git` source repository includes a shell script to download and extract 
-these files: [☞][downloadscript]`download_jla.sh`.  This script is meant to be 
-run manually, and it is not distributed with the source package on PyPI.
+The Git repository includes a shell script to download and extract these 
+files: [☞][downloadscript]`download_jla.sh`.  This script is meant to be run 
+manually, and it is not distributed with the source package on PyPI.
 
 To use the download script, simply invoking the script in the repository 
 directory
@@ -315,7 +315,7 @@ revisions to the codebase.  These tests are included in the
 `tests/test_reprod.py` script and are run by `tox` by default.
 
 
-## Requirements ##
+## Dependencies ##
 
 * [☞][six]`six` (unknown version), for Python 2 and 3 compatibility;
 * [☞][numpy]`numpy` (`>= 1.6.0`), for array data structure and basic 

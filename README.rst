@@ -9,8 +9,8 @@ Summary
 ``libsncompress`` – efficient and reproducible Python utility for
 compressing supernova cosmological data.
 
-Description
------------
+Introduction
+------------
 
 The Python package ``libsncompress`` implements the linear compression
 method described in the paper “Application of Bayesian graphs to SN Ia
@@ -55,7 +55,7 @@ latest version fro the PyPI with ``pip``:
     pip install -U libsncompress
 
 Additional Python packages are required at runtime (please refer to the
-section “`Requirements`_” for the list of dependencies of the current
+section “`Dependencies`_” for the list of dependencies of the current
 version). The recommended installation method is to use the above
 command, which will make sure that the supporting packages are installed
 automatically.
@@ -88,7 +88,7 @@ Synopsis
 
 ::
 
-    jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z [z ...]] [-n] [-v]
+    jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z1 z2 [...]] [-n] [-v]
 
 The script requires JLA data files to run. See the section “`Data
 Files`_” for details.
@@ -103,7 +103,7 @@ Command-Line Options
    ``./jla_lcparams.txt``)
 -  ``-p PREFIX``, ``--output-prefix PREFIX``: prefix to output file
    names
--  ``-c z [z ...]``, ``--controls z [z ...]``: locations of control
+-  ``-c z1 z2 [...]``, ``--controls z1 z2 [...]``: locations of control
    points (as redshift). At least two control points are required. If
    unspecified, use the default control points in the `JLA paper`_.
 -  ``-n``, ``--no-logdet``: don’t use the correct conditional
@@ -182,8 +182,8 @@ If the JLA data archives are already downloaded, you simply need to
 extract the required files and specify their locations when using the
 ``jlacompress`` script, as described `above`_.
 
-The ``git`` source repository includes a shell script to download and
-extract these files:
+The Git repository includes a shell script to download and extract these
+files:
 `☞ <https://gitlab.com/congma/libsncompress/blob/master/download_jla.sh>`__\ ``download_jla.sh``.
 This script is meant to be run manually, and it is not distributed with
 the source package on PyPI.
@@ -345,7 +345,7 @@ The reproducibility tests check that these constraints are satisfied by
 all revisions to the codebase. These tests are included in the
 ``tests/test_reprod.py`` script and are run by ``tox`` by default.
 
-Requirements
+Dependencies
 ------------
 
 -  `☞ <https://pythonhosted.org/six/>`__\ ``six`` (unknown version), for
@@ -420,7 +420,7 @@ The following BibTeX entry could be useful in a LaTeX document:
 .. _MNRAS, submitted: https://arxiv.org/abs/1603.08519
 .. _☞: https://doi.org/10.1093/mnras/stw2069
 .. _JLA: https://arxiv.org/abs/1401.4064
-.. _Requirements: #requirements
+.. _Dependencies: #dependencies
 .. _Testing and Development: #testing-and-development
 .. _M16: https://arxiv.org/abs/1603.08519
 .. _Data Files: #data-files
@@ -443,4 +443,4 @@ The following BibTeX entry could be useful in a LaTeX document:
 .. |license| image:: https://img.shields.io/pypi/l/libsncompress.svg?longCache=true
    :target: https://gitlab.com/congma/libsncompress/blob/master/COPYING
 .. |pyversions| image:: https://img.shields.io/pypi/pyversions/libsncompress.svg
-   :target: #description
+   :target: #introduction
