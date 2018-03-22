@@ -7,7 +7,7 @@ from lsnz_test_infra import jla_full_paths, outdir, ref_ev, ref_ev_nologdet
 
 
 def config_to_cmdlist(config_dict):
-    cmdlist = []
+    cmdlist = ["jlacompress"]
     for option, value in six.iteritems(config_dict):
         cmdlist.append(option)
         if value is not None:
@@ -33,7 +33,7 @@ def test_run_script_help():
 
 @pytest.mark.parametrize("additional_args", [[], ["-n"]])
 def test_run_script(cmd_config, additional_args):
-    cmd = ["jlacompress"] + config_to_cmdlist(cmd_config) + additional_args
+    cmd = config_to_cmdlist(cmd_config) + additional_args
     status = subprocess.call(cmd)
     assert status == 0
 
@@ -42,9 +42,22 @@ def test_new_dir_in_prefix(cmd_config, outdir):
     d = dict(cmd_config)
     test_dir = "%s/nested/new_dir/" % outdir
     d["-p"] = test_dir
-    cmd = ["jlacompress"] + config_to_cmdlist(d)
+    cmd = config_to_cmdlist(d)
     status = subprocess.call(cmd)
     assert status == 0
     dircontent = frozenset(os.listdir(test_dir))
     for name in ("redshift", "mean", "cov"):
         assert ("%s.txt" % name) in dircontent
+
+
+def test_not_enough_points(cmd_config):
+    cmd = config_to_cmdlist(cmd_config) + ["-c", "0.01"]
+    status = subprocess.call(cmd)
+    assert status != 0
+
+
+def test_dupe_points(cmd_config):
+    cmd = config_to_cmdlist(cmd_config) + ["-c", "0.01", "0.03", "0.03",
+                                           "0.05"]
+    status = subprocess.call(cmd)
+    assert status != 0

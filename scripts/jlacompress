@@ -6,8 +6,7 @@ import os.path
 import argparse
 from six import print_, string_types
 import numpy
-import scipy.linalg
-from libsncompress import base, evaluator
+from libsncompress import BinnedSN, CovEvaluator
 
 
 def _info(text, stream=sys.stderr):
@@ -82,13 +81,13 @@ if optns.controls:
     logbins = numpy.log10(numpy.array([optns.controls]))
 else:
     logbins = None
-n = base.BinnedSN(os.path.abspath(optns.covdir),
-                  os.path.abspath(optns.table), logbins)
+n = BinnedSN(os.path.abspath(optns.covdir), os.path.abspath(optns.table),
+             logbins)
 
 nnuis = 3
 npars = nnuis + n.bins.ncontrolpoints
 
-ce = evaluator.CovEvaluator(n, withlogdet=(not optns.no_logdet))
+ce = CovEvaluator(n, withlogdet=(not optns.no_logdet))
 res = ce.minimize()
 if optns.verbose:
     _info(res)
