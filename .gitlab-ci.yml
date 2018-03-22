@@ -37,7 +37,6 @@ job_test:
   cache:
     key: "$CI_JOB_STAGE"
     paths:
-      - .tox/dist
       - .tox/py2/lib/python2.7/site-packages
       - .tox/py3/lib/python3.6/site-packages
   tags:
