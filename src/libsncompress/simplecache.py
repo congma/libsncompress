@@ -54,6 +54,7 @@ that decorate your methods.  For example:
 ...               getsizeof=sys.getsizeof)
 ...     def ham(self, array):
 ...         '''A very small cache.'''
+...         print("ham: function body executed.")
 ...         return array
 
 After that, you can interactively test the effect of memoization by
@@ -98,8 +99,11 @@ A special case for no-caching, for debug only.
 If the cache is too small to store the array, it will be bypassed
 transparently.
 >>> _ = ta.ham(numpy.arange(4))
+ham: function body executed.
 >>> print(ta._cachedict["ham"])
 LRUCache([], maxsize=1, currsize=0)
+>>> _ = ta.ham(numpy.arange(4))
+ham: function body executed.
 
 Author: Cong Ma <cong.ma@obspm.fr>, (c) 2015.  See the file COPYING.
 """
