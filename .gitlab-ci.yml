@@ -61,19 +61,18 @@ job_test_py3:
 
 job_cover:
   stage: covreport
-  image: ubuntu:artful
   before_script:
     - apt-get update -qq -y && apt-get install -y -qq python-coverage python-pip
     - pip install --upgrade --no-cache-dir pip
     - pip install --upgrade --no-cache-dir coverage
   variables:
-    GIT_STRATEGY: none
+    GIT_STRATEGY: fetch
   dependencies:
     - job_test_py2
     - job_test_py3
   script:
     - coverage combine
-    - coverage report -i
+    - coverage report
   coverage: '/^TOTAL\b.+\s+([+-]?(?:\d*\.)?\d+%)\s*$/'
   tags:
     - shared
