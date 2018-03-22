@@ -19,7 +19,6 @@ before_script:
                                           python-pytest python3-pytest \
                                           python-coverage python3-coverage \
                                           tox
-  - apt-get -o Dpkg::Options::="--force-confmiss" install --reinstall netbase
   - pip install --upgrade --no-cache-dir pip
   - pip install --upgrade --no-cache-dir tox
 
@@ -41,6 +40,7 @@ job_test_py2:
     name: "arti-coverdata-$CI_JOB_STAGE-$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - .coverage*
+      - tox.ini
   tags:
     - shared
 
@@ -57,11 +57,14 @@ job_test_py3:
     name: "arti-coverdata-$CI_JOB_STAGE-$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - .coverage*
+      - tox.ini
   tags:
     - shared
 
 job_cover:
   stage: coverage
+  variables:
+    GIT_STRATEGY: none
   dependencies:
     - job_test_py2
     - job_test_py3
