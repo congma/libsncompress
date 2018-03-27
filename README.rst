@@ -182,14 +182,16 @@ If the JLA data archives are already downloaded, you simply need to
 extract the required files and specify their locations when using the
 ``jlacompress`` script, as described `above`_.
 
-The Git repository includes a shell script to download and extract these
-files:
-`☞ <https://gitlab.com/congma/libsncompress/blob/master/download_jla.sh>`__\ ``download_jla.sh``.
-This script is meant to be run manually, and it is not distributed with
-the source package on PyPI.
+| The Git repository includes a shell script to download and extract
+  these files:
+  `☞ <https://gitlab.com/congma/libsncompress/blob/master/download_jla.sh>`__\ ``download_jla.sh``.
+  This script is meant to be run manually, and it is not distributed
+  with the wheel distribution on PyPI.
+| However, it is included in the source distribution, even if it’s
+  skipped during installation of the sdist.
 
 To use the download script, simply invoking the script in the repository
-directory
+(or extracted sdist tarball) directory
 
 ::
 
