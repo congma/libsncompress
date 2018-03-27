@@ -174,7 +174,7 @@ script, as described [above](#command-line-options).
 
 The Git repository includes a shell script to download and extract these 
 files: [☞][downloadscript]`download_jla.sh`.  This script is meant to be run 
-manually, and it is not distributed with the wheel distribution on PyPI.  
+manually, and it is not distributed with the wheel distribution on PyPI.
 However, it is included in the source distribution, even if it's skipped 
 during installation of the sdist.
 
