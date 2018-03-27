@@ -1,7 +1,7 @@
 libsncompress
 =============
 
-|pipeline| |coverage| |pypi| |license| |pyversions|
+|pipeline| |coverage| |pypi| |license| |pyversions| |DOI|
 
 Summary
 -------
@@ -446,3 +446,5 @@ The following BibTeX entry could be useful in a LaTeX document:
    :target: https://gitlab.com/congma/libsncompress/blob/master/COPYING
 .. |pyversions| image:: https://img.shields.io/pypi/pyversions/libsncompress.svg
    :target: #introduction
+.. |DOI| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1208155.svg
+   :target: https://doi.org/10.5281/zenodo.1208155

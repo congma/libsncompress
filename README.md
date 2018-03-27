@@ -5,6 +5,7 @@
 [![pypi](https://img.shields.io/pypi/v/libsncompress.svg)](https://pypi.org/project/libsncompress/)
 [![license](https://img.shields.io/pypi/l/libsncompress.svg?longCache=true)](https://gitlab.com/congma/libsncompress/blob/master/COPYING)
 [![pyversions](https://img.shields.io/pypi/pyversions/libsncompress.svg)](#introduction)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1208155.svg)](https://doi.org/10.5281/zenodo.1208155)
 
 
 ## Summary ##
