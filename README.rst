@@ -1,7 +1,7 @@
 libsncompress
 =============
 
-|pipeline| |coverage| |pypi| |license| |pyversions|
+|pipeline| |coverage| |pypi| |license| |pyversions| |DOI|
 
 Summary
 -------
@@ -182,14 +182,16 @@ If the JLA data archives are already downloaded, you simply need to
 extract the required files and specify their locations when using the
 ``jlacompress`` script, as described `above`_.
 
-The Git repository includes a shell script to download and extract these
-files:
-`☞ <https://gitlab.com/congma/libsncompress/blob/master/download_jla.sh>`__\ ``download_jla.sh``.
-This script is meant to be run manually, and it is not distributed with
-the source package on PyPI.
+| The Git repository includes a shell script to download and extract
+  these files:
+  `☞ <https://gitlab.com/congma/libsncompress/blob/master/download_jla.sh>`__\ ``download_jla.sh``.
+  This script is meant to be run manually, and it is not distributed
+  with the wheel distribution on PyPI.
+| However, it is included in the source distribution, even if it’s
+  skipped during installation of the sdist.
 
 To use the download script, simply invoking the script in the repository
-directory
+(or extracted sdist tarball) directory
 
 ::
 
@@ -444,3 +446,5 @@ The following BibTeX entry could be useful in a LaTeX document:
    :target: https://gitlab.com/congma/libsncompress/blob/master/COPYING
 .. |pyversions| image:: https://img.shields.io/pypi/pyversions/libsncompress.svg
    :target: #introduction
+.. |DOI| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1208155.svg
+   :target: https://doi.org/10.5281/zenodo.1208155

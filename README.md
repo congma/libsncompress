@@ -5,6 +5,7 @@
 [![pypi](https://img.shields.io/pypi/v/libsncompress.svg)](https://pypi.org/project/libsncompress/)
 [![license](https://img.shields.io/pypi/l/libsncompress.svg?longCache=true)](https://gitlab.com/congma/libsncompress/blob/master/COPYING)
 [![pyversions](https://img.shields.io/pypi/pyversions/libsncompress.svg)](#introduction)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1208155.svg)](https://doi.org/10.5281/zenodo.1208155)
 
 
 ## Summary ##
@@ -173,10 +174,12 @@ script, as described [above](#command-line-options).
 
 The Git repository includes a shell script to download and extract these 
 files: [☞][downloadscript]`download_jla.sh`.  This script is meant to be run 
-manually, and it is not distributed with the source package on PyPI.
+manually, and it is not distributed with the wheel distribution on PyPI.  
+However, it is included in the source distribution, even if it's skipped 
+during installation of the sdist.
 
-To use the download script, simply invoking the script in the repository 
-directory
+To use the download script, simply invoking the script in the repository (or 
+extracted sdist tarball) directory
 ```
 ./download_jla.sh
 ```
