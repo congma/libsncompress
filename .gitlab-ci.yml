@@ -83,6 +83,7 @@ job_cover:
     - pip install --upgrade --no-cache-dir pypandoc
   tags:
     - shared
+  allow_failure: true
 
 job_testpypi:
   <<: *pypi_boiler
