@@ -52,7 +52,7 @@ latest version fro the PyPI with ``pip``:
 
 ::
 
-    pip install -U libsncompress
+   pip install -U libsncompress
 
 Additional Python packages are required at runtime (please refer to the
 section “`Dependencies`_” for the list of dependencies of the current
@@ -66,7 +66,7 @@ the repository using ``git``:
 
 ::
 
-    git clone https://gitlab.com/congma/libsncompress.git
+   git clone https://gitlab.com/congma/libsncompress.git
 
 The full repository includes also the necessary files for testing and
 verification. Please refer to the section “`Testing and Development`_”
@@ -88,7 +88,7 @@ Synopsis
 
 ::
 
-    jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z1 z2 [...]] [-n] [-v]
+   jlacompress [-h] [-d DIR] [-t FILE] [-p PREFIX] [-c z1 z2 [...]] [-n] [-v]
 
 The script requires JLA data files to run. See the section “`Data
 Files`_” for details.
@@ -157,7 +157,7 @@ command reproduces the default compression results in the `JLA paper`_.
 
 ::
 
-    jlacompress -n
+   jlacompress -n
 
 Data Files
 ----------
@@ -194,7 +194,7 @@ To use the download script, simply invoking the script in the repository
 
 ::
 
-    ./download_jla.sh
+   ./download_jla.sh
 
 will suffice – this will populate the ``testdata`` directory with the
 necessary files and check the file integrity. Doing so also ensures that
@@ -210,7 +210,7 @@ To use the package directly in your own Python project, simply
 
 .. code:: python
 
-    import libsncompress
+   import libsncompress
 
 This will import three classes from its sub-modules into the
 ``libsncompress`` namespace:
@@ -233,9 +233,9 @@ initialized by
 
 .. code:: python
 
-    binned_sn = libsncompress.BinnedSN(basedirpath,
-                                       tablepath,
-                                       logbins=control_points)
+   binned_sn = libsncompress.BinnedSN(basedirpath,
+                                      tablepath,
+                                      logbins=control_points)
 
 Here ``basedirpath`` is the path to the directory containing the FITS
 covariance data files, ``tablepath`` the path to the text file
@@ -249,7 +249,7 @@ this:
 
 .. code:: python
 
-    ev = libsncompress.CovEvaluator(binned_sn, withlogdet=True)
+   ev = libsncompress.CovEvaluator(binned_sn, withlogdet=True)
 
 The optional argument ``withlogdet`` controls whether the full effect of
 parameter-dependent covariance matrix is taken into account. It is so
@@ -297,7 +297,7 @@ testing environments.
 
 ::
 
-    pip install 'tox >= 2.8.0'
+   pip install 'tox >= 2.8.0'
 
 Although not strictly necessary for running the tests themselves *per
 se*, it is recommended to install the
@@ -312,7 +312,7 @@ If you have both Python 2.7 and 3.6 installed, simply invoking
 
 ::
 
-    tox
+   tox
 
 will create the source distribution and run the tests under both Python
 variants. The default configuration will pull the latest supporting
@@ -323,7 +323,7 @@ you can run
 
 ::
 
-    tox -e py2,coverage-report
+   tox -e py2,coverage-report
 
 and skip the unavailable test environment setting.
 
@@ -405,18 +405,18 @@ The following BibTeX entry could be useful in a LaTeX document:
 
 ::
 
-    @ARTICLE{2016MNRAS.463.1651M,
-       author = {{Ma}, C. and {Corasaniti}, P.-S. and {Bassett}, B.~A.},
-        title = "{Application of Bayesian graphs to SN Ia data analysis and compression}",
-      journal = {MNRAS},
-    archivePrefix = "arXiv",
-       eprint = {1603.08519},
-         year = 2016,
-        month = dec,
-       volume = 463,
-        pages = {1651-1665},
-          doi = {10.1093/mnras/stw2069}
-    }
+   @ARTICLE{2016MNRAS.463.1651M,
+      author = {{Ma}, C. and {Corasaniti}, P.-S. and {Bassett}, B.~A.},
+       title = "{Application of Bayesian graphs to SN Ia data analysis and compression}",
+     journal = {MNRAS},
+   archivePrefix = "arXiv",
+      eprint = {1603.08519},
+        year = 2016,
+       month = dec,
+      volume = 463,
+       pages = {1651-1665},
+         doi = {10.1093/mnras/stw2069}
+   }
 
 .. _MNRAS, submitted: https://arxiv.org/abs/1603.08519
 .. _☞: https://doi.org/10.1093/mnras/stw2069
