@@ -19,7 +19,6 @@ before_script:
                                           python-pytest python3-pytest \
                                           python-coverage python3-coverage \
                                           tox
-  - pip install --upgrade --no-cache-dir pip
   - pip install --upgrade --no-cache-dir tox
 
 stages:
@@ -63,7 +62,6 @@ job_cover:
   stage: covreport
   before_script:
     - apt-get update -qq -y && apt-get install -y -qq python-coverage python-pip
-    - pip install --upgrade --no-cache-dir pip
     - pip install --upgrade --no-cache-dir coverage
   variables:
     GIT_STRATEGY: fetch
@@ -81,7 +79,6 @@ job_cover:
   stage: deploy
   before_script:
     - apt-get update -qq -y && apt-get install -y -qq twine pandoc python3-pip
-    - pip install --upgrade --no-cache-dir pip
     - pip install --upgrade --no-cache-dir twine
     - pip install --upgrade --no-cache-dir pypandoc
   tags:
