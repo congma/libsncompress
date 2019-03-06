@@ -295,7 +295,7 @@ from PyPI specified in the file `devel-requirements.txt`.
 If you have only one working variant of Python, for example Python 2.7, you 
 can run
 ```
-tox -e py2,coverage-report
+tox -e py27,coverage-report
 ```
 and skip the unavailable test environment setting.
 

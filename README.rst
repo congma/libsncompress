@@ -323,7 +323,7 @@ you can run
 
 ::
 
-   tox -e py2,coverage-report
+   tox -e py27,coverage-report
 
 and skip the unavailable test environment setting.
 
