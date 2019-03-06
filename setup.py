@@ -65,7 +65,7 @@ else:
 
 
 pname = "libsncompress"
-setup(name=pname, version="0.0.8rc1",
+setup(name=pname, version="0.0.8",
       description="Compress JLA-like supernova data",
       long_description=rst_text,
       author="Cong Ma",
@@ -75,6 +75,7 @@ setup(name=pname, version="0.0.8rc1",
       package_dir={"": "src"},
       scripts=["scripts/jlacompress"],
       data_files=[("share/libsncompress", glob("testdata/m16/table_*.txt"))],
+      python_requires=">=2.7, ~=3.6"
       install_requires=["six", "numpy >= 1.6.0", "scipy >= 0.11.0", "astropy",
                         "cachetools"],
       setup_requires=["six", "pypandoc"],
