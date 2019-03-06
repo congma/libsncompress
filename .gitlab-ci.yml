@@ -58,7 +58,7 @@ job_test_py36:
   tags:
     - shared
 
-job_test_py36:
+job_test_py37:
   stage: test
   before_script:
       - |
@@ -89,8 +89,9 @@ job_cover:
   variables:
     GIT_STRATEGY: fetch
   dependencies:
-    - job_test_py2
-    - job_test_py3
+    - job_test_py27
+    - job_test_py36
+    - job_test_py37
   script:
     - coverage combine
     - coverage report
