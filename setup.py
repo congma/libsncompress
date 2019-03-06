@@ -65,7 +65,7 @@ else:
 
 
 pname = "libsncompress"
-setup(name=pname, version="0.0.7",
+setup(name=pname, version="0.0.8rc1",
       description="Compress JLA-like supernova data",
       long_description=rst_text,
       author="Cong Ma",
@@ -89,6 +89,7 @@ setup(name=pname, version="0.0.7",
                    "Operating System :: OS Independent",
                    "Programming Language :: Python :: 2.7",
                    "Programming Language :: Python :: 3.6",
+                   "Programming Language :: Python :: 3.7",
                    "Programming Language :: Python :: Implementation :: "
                    "CPython",
                    "Topic :: Scientific/Engineering :: Astronomy",

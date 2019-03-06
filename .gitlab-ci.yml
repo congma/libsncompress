@@ -26,14 +26,14 @@ stages:
   - covreport
   - deploy
 
-job_test_py2:
+job_test_py27:
   stage: test
   script:
-    - tox -e py2
+    - tox -e py27
   cache:
     key: "$CI_JOB_NAME"
     paths:
-      - .tox/py2/lib/python2.7/site-packages
+      - .tox/py27/lib/python2.7/site-packages
   artifacts:
     expire_in: "1h30min"
     name: "arti-coverdata-$CI_JOB_STAGE-$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
@@ -42,14 +42,37 @@ job_test_py2:
   tags:
     - shared
 
-job_test_py3:
+job_test_py36:
   stage: test
   script:
-    - tox -e py3
+    - tox -e py36
   cache:
     key: "$CI_JOB_NAME"
     paths:
-      - .tox/py3/lib/python3.6/site-packages
+      - .tox/py36/lib/python3.6/site-packages
+  artifacts:
+    expire_in: "1h30min"
+    name: "arti-coverdata-$CI_JOB_STAGE-$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths:
+      - .coverage*
+  tags:
+    - shared
+
+job_test_py37:
+  stage: test
+  before_script:
+      - |
+        apt-get update -qq -y && apt-get install -y -qq \
+                python python3.7 \
+                pandoc \
+                tox
+      - pip install --upgrade --no-cache-dir tox
+  script:
+    - tox -e py37
+  cache:
+    key: "$CI_JOB_NAME"
+    paths:
+      - .tox/py37/lib/python3.7/site-packages
   artifacts:
     expire_in: "1h30min"
     name: "arti-coverdata-$CI_JOB_STAGE-$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
@@ -66,8 +89,9 @@ job_cover:
   variables:
     GIT_STRATEGY: fetch
   dependencies:
-    - job_test_py2
-    - job_test_py3
+    - job_test_py27
+    - job_test_py36
+    - job_test_py37
   script:
     - coverage combine
     - coverage report
@@ -79,8 +103,8 @@ job_cover:
   stage: deploy
   before_script:
     - apt-get update -qq -y && apt-get install -y -qq twine pandoc python3-pip
-    - pip install --upgrade --no-cache-dir twine
-    - pip install --upgrade --no-cache-dir pypandoc
+    - pip3 install --upgrade --no-cache-dir twine
+    - pip3 install --upgrade --no-cache-dir pypandoc
   tags:
     - shared
   allow_failure: true
@@ -97,7 +121,7 @@ job_testpypi:
     TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
     TWINE_USERNAME: congma
   script:
-    - python setup.py sdist bdist_wheel
+    - python3 setup.py sdist bdist_wheel
     - twine upload -p $GLCD_TESTPYPI_PW dist/libsncompress-*
 
 job_pypi:
@@ -113,5 +137,5 @@ job_pypi:
     TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
     TWINE_USERNAME: congma
   script:
-    - python setup.py sdist bdist_wheel
+    - python3 setup.py sdist bdist_wheel
     - twine upload -p $GLCD_PYPI_PW dist/libsncompress-*

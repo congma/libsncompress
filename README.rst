@@ -39,7 +39,7 @@ The intended usage includes the following tasks:
 -  To help developing new methods of data analysis and compression with
    current and future data based on the current work.
 
-The programs work with both Python 2.7 and 3.6.
+The programs work with both Python 2.7 and 3.6/3.7.
 
 Installation
 ------------
@@ -308,7 +308,7 @@ operating system documentation) and the
 Running the Tests
 ~~~~~~~~~~~~~~~~~
 
-If you have both Python 2.7 and 3.6 installed, simply invoking
+If you have both Python 2.7 and 3.6/3.7 installed, simply invoking
 
 ::
 
